@@ -1,0 +1,115 @@
+@import "http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css";
+
+@import "variables";
+$plain-bg:lighten($body-bg, 3);
+$plain-border:lighten($body-bg, 10);
+
+@import "sass-bootstrap/lib/bootstrap";
+@import "scrollbar";
+@import "animations";
+
+
+.logo {
+    position:fixed;
+    top:5px;
+    left:0px;
+    right:0;
+    background:url("../images/logo.png") 25px 0  no-repeat;    
+    height:65px;
+    display:block;
+    border-bottom:1px solid darken($body-bg, 5);
+    @include box-shadow(0 1px 0 0 rgba(white, .5));
+}
+
+.view {
+    position:absolute;
+    top:40px+53px;
+    left:20px;
+    margin-right:20px;
+    bottom:20px;
+    right:0px;
+    
+    .content {
+        margin:0;
+        height:100%;
+    }
+
+    .full-col {
+        height:100%;
+        position:relative;
+
+        h3 {   
+            z-index:110;
+            position:absolute;
+            
+            margin:0px;
+            padding:0 20px;
+            height:45px;            
+            line-height:45px;
+            background:$plain-border;
+            @include box-shadow(inherit);
+            top:0;
+            left:20px;
+            right:20px;
+            
+            i {
+                text-style:normal;
+                color:darken($text-color, 20);
+            }
+        }
+                
+        .plain {            
+            z-index:90;
+            position:absolute;
+            
+            overflow:auto;
+            top:45px;
+            bottom:0;
+            left:20px;
+            right:20px;
+            background:$plain-bg;
+            border-right:solid 1px $plain-border;
+            @include box-shadow(0 0 3px 2px darken($body-bg, 5));
+            
+
+            .items {
+
+                li {                    
+                    padding:15px 20px;
+                    border-bottom:solid 1px $plain-border;
+                }
+            }
+
+        }
+    }
+}
+
+.preview {
+    z-index:120;
+    position:absolute;
+    left:100%;
+    width:66.66%;
+    overflow:auto;
+    top:0px;
+    bottom:0px;
+    margin-right:20px;
+    background: white;
+    
+    @include box-shadow(0 0 3px 2px darken($body-bg, 5));
+    @include animation(0.7s fadeIn);
+    
+    article {
+        padding:0 30px;
+        display:block;
+    }
+
+    &.visible {
+        display:block;
+    }
+
+    a.close {
+        position:absolute;
+        top:10px;
+        right:10px;
+    }
+}

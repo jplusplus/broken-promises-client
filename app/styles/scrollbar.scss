@@ -1,0 +1,13 @@
+.jspVerticalBar {
+	background:none;
+	
+	.jspTrack {	
+		background:none;
+		
+		border-left:1px solid $plain-border;
+		
+		.jspDrag {
+			background:$text-color;
+		}
+	}
+}

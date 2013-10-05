@@ -1,0 +1,21 @@
+{
+  "name": "brokenPromises",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "~1.2.*",
+    "json3": "~3.2.4",
+    "jquery": "~1.9.1",    
+    "sass-bootstrap": "~3.0.0",
+    "es5-shim": "~2.0.8",
+    "angular-resource": "~1.2.*",
+    "angular-cookies": "~1.2.*",
+    "angular-sanitize": "~1.2.*",
+    "angular-route": "~1.2.*",
+    "jscrollpane": "*",
+    "jquery.scrollTo": "*"    
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.*",
+    "angular-scenario": "~1.2.*"
+  }
+}
