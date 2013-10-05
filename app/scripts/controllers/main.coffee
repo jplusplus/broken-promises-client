@@ -1,11 +1,25 @@
 'use strict'
 
 angular.module('brokenPromisesApp')
-    .controller 'MainCtrl', ($scope) ->
-        $scope.today = new Date()
-        $scope.items = []
-        for i in new Array(100)
-        	$scope.items.push(i)
-        $scope.active = -1   
+    .controller 'MainCtrl', ($scope, $http, $filter) ->
+        today = $scope.today = new Date()
+        month = $filter('date')(today, "MMMM")
+        year  = $filter('date')(today, "yyyy")        
+        $scope.monthPlus = []
+        $scope.yearPlus  = []
+        # Loads data from files
+        $http.get("./data/days-#{month.toLowerCase()}-#{year}.json").then (d)-> 
+            $scope.days = d.data            
+        $http.get("./data/#{month.toLowerCase()}-#{year}.json").then (d)->             
+            $scope.month = d.data
+        $http.get("./data/#{year}.json").then (d)-> 
+            $scope.year = d.data
+        $scope.active  = -1   
+        $scope.article = null
         $scope.previewStyle = ->
-            left: if $scope.active is -1 then "100%" else ($scope.active+1)*33.33 + "%"
+            left: if $scope.active is -1 then "100%" else ($scope.active+1)*33.33 + "%"        
+        $scope.setArticle = (article, active=-1)->
+            # Record the data to the scope
+            $scope.article = article
+            $scope.active  = active 
+        $scope.isToday = (item)-> true

@@ -1,7 +1,8 @@
 'use strict'
 
 angular.module('brokenPromisesApp', ["ngRoute"])
-  .config ["$routeProvider", ($routeProvider) ->
+  .config ["$routeProvider", "$sceProvider", ($routeProvider,$sceProvider) ->
+    $sceProvider.enabled(false)
     $routeProvider
       .when '/',
         templateUrl   : 'views/main.html'

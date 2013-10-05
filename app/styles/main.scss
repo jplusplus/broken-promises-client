@@ -89,9 +89,19 @@ $plain-border:lighten($body-bg, 10);
 
             .items {
 
-                li {                    
+                li {                           
+                    cursor:pointer;             
                     padding:15px 20px;
                     border-bottom:solid 1px $plain-border;
+                    
+                    &:hover {
+                        background:darken($plain-bg, 5);
+                    }
+                    
+                    .publication-date {
+                        font-size:80%;
+                        margin-bottom:0;
+                    }
                 }
             }
 
@@ -136,7 +146,7 @@ $plain-border:lighten($body-bg, 10);
 
     .scrollbar {
         padding:0 20px;
-        padding-bottom:20px;
+        padding-bottom:40px;
     }
 
     &:after {
