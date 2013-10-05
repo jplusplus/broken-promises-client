@@ -18,7 +18,7 @@ $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 // Brand colors
 // -------------------------
 
-$brand-primary:         #D61D00 !default;
+$brand-primary:         #0F4C82 !default;
 $brand-success:         #5cb85c !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
@@ -39,10 +39,10 @@ $link-hover-color:      darken($link-color, 15%) !default;
 // Typography
 // -------------------------
 
-$font-family-sans-serif:  arial, sans-serif !default;
+$font-family-sans-serif:  'Raleway', arial, sans-serif !default;
 $font-family-serif:       Georgia, georgia, serif "Times New Roman", Times !default;
 $font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace !default;
-$font-family-base:        $font-family-sans-serif !default;
+$font-family-base:        arial, sans-serif !default;
 
 $font-size-base:          14px !default;
 $font-size-large:         ceil($font-size-base * 1.25) !default; // ~18px
@@ -51,8 +51,8 @@ $font-size-small:         ceil($font-size-base * 0.85) !default; // ~12px
 $line-height-base:        1.428571429 !default; // 20/14
 $line-height-computed:    floor($font-size-base * $line-height-base) !default; // ~20px
 
-$headings-font-family:    $font-family-serif !default;
-$headings-font-weight:    500 !default;
+$headings-font-family:    $font-family-sans-serif !default;
+$headings-font-weight:    900 !default;
 $headings-line-height:    1.1 !default;
 
 // Iconography
