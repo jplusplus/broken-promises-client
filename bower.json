@@ -13,7 +13,8 @@
     "angular-route": "~1.2.*",
     "jscrollpane": "*",
     "jquery.scrollTo": "*", 
-    "underscore": "*"
+    "underscore": "*",
+    "angular-ui-bootstrap-bower": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.*",

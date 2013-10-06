@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('brokenPromisesApp', ["ngRoute"])
+angular.module('brokenPromisesApp', ["ngRoute", "ui.bootstrap"])
   .config ["$routeProvider", "$sceProvider", ($routeProvider,$sceProvider) ->
     $sceProvider.enabled(false)
     $routeProvider

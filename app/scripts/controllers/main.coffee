@@ -37,12 +37,12 @@ angular.module('brokenPromisesApp')
             $scope.days = []
             for article in d.data
                 article["reference date"]       = parseDate(article["reference date"])
-                article["web_publication_date"] = parseDate(article["web_publication_date"])       
+                article["web_publication_date"] = parseDate(article["web_publication_date"])    
                 # Same day!
                 if daysBetween(article["reference date"], today) == 0
                     $scope.days.push article
                 # Same month!
-                else if monthsBetween(article["reference date"], today) == 0
+                else if article["category"] is "month"
                     $scope.month.push article
                 # Same year!
                 else if article["reference date"].getFullYear() == today.getFullYear()
