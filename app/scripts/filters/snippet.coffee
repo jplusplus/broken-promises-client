@@ -19,6 +19,7 @@ angular.module("brokenPromisesApp").filter "snippet", ->
           theMatch = "october 2013"
         when "year"
           theMatch = "2013"
+      targetIndex = parts[i].indexOf(theMatch)
       return parts[i].replace(theMatch, "<span class=\"littlepart\">" + theMatch + "</span>")  if targetIndex isnt -1
       i++
     trimmedString = string.substr(0, 100)

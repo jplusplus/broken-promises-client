@@ -102,6 +102,11 @@ $plain-border:lighten($body-bg, 10);
                         font-size:80%;
                         margin-bottom:0;
                     }
+    
+                    .littlepart {
+                        padding:0 2px;
+                        background:rgba(yellow, 0.3);
+                    }                    
 
                     &.active {
                         color:white;
@@ -110,7 +115,12 @@ $plain-border:lighten($body-bg, 10);
                         .text-muted {
                             color:rgba(white, 0.9);
                         }
-
+        
+                        .littlepart {
+                            background:rgba(white, 0.1);
+                            color:mix(yellow, white);
+                        }  
+                    
                         .badge {
                             background-color:rgba(white, 0.2);
                             color:white;

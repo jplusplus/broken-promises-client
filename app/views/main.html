@@ -22,7 +22,8 @@
 				<li ng-repeat="item in month|orderBy:'web_publication_date':'desc'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.web_url == item.web_url}">
 					<p class="bold title">{{item.web_title || item.headline}}<p>
 					<p class="text-muted snippet">
-						{{item.body | snippet:'month'}}				
+						<span ng-bind-html="item.snippet | snippet:'month'" ng-if="!item.snippet"></span>
+						<span ng-bind-html="item.body    | snippet:'month'" ng-if="item.snippet"></span>
 					</p>
 					<p class="text-right publication-date">
 						<span class="badge">{{item.web_publication_date | date:'MM/dd/yyyy'}}</span>
@@ -38,7 +39,8 @@
 				<li ng-repeat="item in year" ng-click="setArticle(item, 2)" ng-class="{active: article.web_url == item.web_url}">
 					<p class="bold title">{{item.web_title || item.headline}}<p>
 					<p class="text-muted snippet">
-						{{item.body | snippet:'year'}}				
+						<span ng-bind-html="item.snippet | snippet:'year'" ng-if="!item.snippet"></span>
+						<span ng-bind-html="item.body    | snippet:'year'" ng-if="item.snippet"></span>	
 					</p>
 					<p class="text-right publication-date">
 						<span class="badge">{{item.web_publication_date | date:'MM/dd/yyyy'}}</span>
