@@ -1,12 +1,16 @@
 <div class="row content">
 	<div class="col-xs-4 full-col">
 		<h3>
-			<b class="pull-right hidden">?</b>
+			<b class="pull-right" 
+			popover="This column shows articles in the Guardian archive mentioning October 7 2013." 
+			popover-placement="left" 
+			popover-append-to-body="true" 
+			popover-trigger="mouseenter">?</b>
 			{{today|date:'MMMM dd yyyy'}}
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-repeat="item in days|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.web_url == item.web_url}">
+				<li ng-repeat="item in days|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.web_url == item.web_url && active > -1}">
 					<p class="bold title">{{item.web_title || item.headline}}<p>
 					<p class="text-muted snippet">
 						<span ng-bind-html="item.snippet" ng-if="item.snippet"></span>
@@ -21,12 +25,16 @@
 	</div>
 	<div class="col-xs-4 full-col" ng-click="active = 1">
 		<h3>
-			<b class="pull-right hidden">?</b>
+			<b class="pull-right" 
+			popover="This column shows articles mentioning October 2013." 
+			popover-placement="left" 
+			popover-append-to-body="true" 
+			popover-trigger="mouseenter">?</b>
 			{{today|date:'MMMM yyyy'}}
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-repeat="item in month|orderBy:'web_publication_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.web_url == item.web_url}">
+				<li ng-repeat="item in month|orderBy:'web_publication_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.web_url == item.web_url && active > -1}">
 					<p class="bold title">{{item.web_title || item.headline}}<p>
 					<p class="text-muted snippet">
 						<span ng-bind-html="item.snippet" ng-if="item.snippet != 'NULL'"></span>
@@ -41,12 +49,16 @@
 	</div>
 	<div class="col-xs-4 full-col" ng-click="active = 2">
 		<h3>
-			<b class="pull-right hidden">?</b>
+			<b class="pull-right" 
+			popover="This column show articles from 2012 or later mentioning 2013." 
+			popover-placement="left" 
+			popover-append-to-body="true" 
+			popover-trigger="mouseenter">?</b>
 			{{today|date:'yyyy'}}
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-repeat="item in year|orderBy:'web_publication_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.web_url == item.web_url}">
+				<li ng-repeat="item in year|orderBy:'web_publication_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.web_url == item.web_url && active > -1}">
 					<p class="bold title">{{item.web_title || item.headline}}<p>
 					<p class="text-muted snippet">
 						<span ng-bind-html="item.snippet" ng-if="item.snippet != 'NULL'"></span>
