@@ -2,7 +2,7 @@
 
 angular.module('brokenPromisesApp')
     .controller 'MainCtrl', ($scope, $http, $filter) ->
-        today = $scope.today = new Date()
+        today = $scope.today = new Date(2013, 10, 07)
         month = $filter('date')(today, "MMMM")
         year  = $filter('date')(today, "yyyy")        
         $scope.monthPlus = []

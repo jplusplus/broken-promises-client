@@ -102,6 +102,20 @@ $plain-border:lighten($body-bg, 10);
                         font-size:80%;
                         margin-bottom:0;
                     }
+
+                    &.active {
+                        color:white;
+                        background:$brand-primary;
+                        
+                        .text-muted {
+                            color:rgba(white, 0.9);
+                        }
+
+                        .badge {
+                            background-color:rgba(white, 0.2);
+                            color:white;
+                        }
+                    }
                 }
             }
 
