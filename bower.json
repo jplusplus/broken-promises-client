@@ -12,7 +12,8 @@
     "angular-sanitize": "~1.2.*",
     "angular-route": "~1.2.*",
     "jscrollpane": "*",
-    "jquery.scrollTo": "*"    
+    "jquery.scrollTo": "*", 
+    "underscore": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.*",
