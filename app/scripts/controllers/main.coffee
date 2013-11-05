@@ -4,7 +4,9 @@ angular.module('brokenPromisesApp')
     .controller 'MainCtrl', ($scope, $http, $filter, Restangular) ->
         today = $scope.today = new Date()
         month = $filter('date')(today, "MMMM")
+        monthDigit = $filter('date')(today, "MM")
         year  = $filter('date')(today, "yyyy")
+        day = $filter('date')(today, "dd")
         $scope.month = []
         $scope.year  = []
         # Date information
@@ -13,16 +15,17 @@ angular.module('brokenPromisesApp')
           month : month
           year : year
         # Loads data from API
-        (do (Restangular.all 'articles').getList).then (data) =>
+        filter = 'where={"ref_date":"' + year + '"}'
+        (do (Restangular.all "articles?#{filter}").getList).then (data) =>
           $scope.days = []
           _.map data[0], (article) =>
-            year = parseInt article['ref_date'][0]
-            if year is do today.getFullYear
-              month = (parseInt article['ref_date'][1]) - 1
-              day = parseInt article['ref_date'][2]
-              article['reference_date'] = new Date year, month, day
-              if month is do today.getMonth
-                if day is do today.getDate
+            a_year = article['ref_date'][0]
+            if a_year is year
+              a_month = article['ref_date'][1]
+              a_day = article['ref_date'][2]
+              article['reference_date'] = new Date a_year, a_month, a_day
+              if a_month is monthDigit
+                if a_day is day
                   $scope.days.push article
                 else
                   $scope.month.push article
