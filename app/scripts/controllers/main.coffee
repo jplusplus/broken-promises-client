@@ -26,32 +26,28 @@ monthsBetween = (first, second) ->
     if months <= 0 then 0 else months
 
 angular.module('brokenPromisesApp')
-    .controller 'MainCtrl', ($scope, $http, $filter) ->
-        today = $scope.today = new Date(2013, 9, 7)
+    .controller 'MainCtrl', ($scope, $http, $filter, Restangular) ->
+        today = $scope.today = new Date()
         month = $filter('date')(today, "MMMM")
         year  = $filter('date')(today, "yyyy")        
         $scope.month = []
         $scope.year  = []
-        # Loads data from files
-        $http.get("./data/days-#{month.toLowerCase()}-#{year}.json").then (d)-> 
-            $scope.days = []
-            for article in d.data
-                article["reference date"]       = parseDate(article["reference date"])
-                article["web_publication_date"] = parseDate(article["web_publication_date"])    
-                # Same day!
-                if daysBetween(article["reference date"], today) == 0
-                    $scope.days.push article
-                # Same month!
-                else if article["category"] is "month"
-                    $scope.month.push article
-                # Same year!
-                else if article["reference date"].getFullYear() == today.getFullYear()
-                    $scope.year.push article
-
-        $http.get("./data/#{month.toLowerCase()}-#{year}.json").then (d)->             
-            $scope.month = $scope.month.concat d.data
-        $http.get("./data/#{year}.json").then (d)-> 
-            $scope.year = $scope.year.concat d.data
+        # Loads data from API
+        (do (Restangular.all 'articles').getList).then (data) =>
+          $scope.days = []
+          _.map data[0], (article) =>
+            year = parseInt article['ref_date'][0]
+            if year is do today.getFullYear
+              month = (parseInt article['ref_date'][1]) - 1
+              day = parseInt article['ref_date'][2]
+              article['reference_date'] = new Date year, month, day
+              if month is do today.getMonth
+                if day is do today.getDate
+                  $scope.days.push article
+                else
+                  $scope.month.push article
+              else
+                $scope.year.push article
         $scope.active  = -1   
         $scope.article = null
         $scope.previewStyle = ->

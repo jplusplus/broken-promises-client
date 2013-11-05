@@ -11,13 +11,13 @@
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
 				<li ng-repeat="item in days|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.web_url == item.web_url && active > -1}">
-					<p class="bold title">{{item.web_title || item.headline}}<p>
+					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
 						<span ng-bind-html="item.snippet" ng-if="item.snippet"></span>
 						<span ng-bind-html="item.body | snippet:'day'" ng-if="!item.snippet"></span>	
 					</p>
 					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.web_publication_date | date:'MM/dd/yyyy'}}</span>
+						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
 					</p>
 				</li>
 			</ul>
@@ -34,14 +34,14 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-repeat="item in month|orderBy:'web_publication_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.web_url == item.web_url && active > -1}">
-					<p class="bold title">{{item.web_title || item.headline}}<p>
+				<li ng-repeat="item in month|orderBy:'pub_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.web_url == item.web_url && active > -1}">
+					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet" ng-if="item.snippet != 'NULL'"></span>
-						<span ng-bind-html="item.body | snippet:'month'" ng-if="item.snippet == 'NULL'"></span>
+						<span ng-bind-html="item.snippet" ng-if="item.snippet"></span>
+						<span ng-bind-html="item.body | snippet:'month'" ng-if="!item.snippet"></span>
 					</p>
 					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.web_publication_date | date:'MM/dd/yyyy'}}</span>
+						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
 					</p>
 				</li>
 			</ul>
@@ -58,14 +58,14 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-repeat="item in year|orderBy:'web_publication_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.web_url == item.web_url && active > -1}">
-					<p class="bold title">{{item.web_title || item.headline}}<p>
+				<li ng-repeat="item in year|orderBy:'pub_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.web_url == item.web_url && active > -1}">
+					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet" ng-if="item.snippet != 'NULL'"></span>
-						<span ng-bind-html="item.body | snippet:'year'" ng-if="item.snippet == 'NULL'"></span>
+						<span ng-bind-html="item.snippet" ng-if="item.snippet"></span>
+						<span ng-bind-html="item.body | snippet:'year'" ng-if="!item.snippet"></span>
 					</p>
 					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.web_publication_date | date:'MM/dd/yyyy'}}</span>
+						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
 					</p>
 				</li>
 			</ul>
