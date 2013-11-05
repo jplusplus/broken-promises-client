@@ -15,14 +15,17 @@ angular.module('brokenPromisesApp')
           month : month
           year : year
         # Loads data from API
-        filter = 'where={"ref_date":"' + year + '"}'
-        (do (Restangular.all "articles?#{filter}").getList).then (data) =>
+        #filter = '?where={"ref_date":"' + year + '"}'
+        filter = ''
+        (do (Restangular.all "articles#{filter}").getList).then (data) =>
           $scope.days = []
-          _.map data[0], (article) =>
-            a_year = article['ref_date'][0]
+          _.map data._items, (article) =>
+            if not article.ref_dates[0]?
+              return
+            a_year = article.ref_dates[0].date[0]
             if a_year is year
-              a_month = article['ref_date'][1]
-              a_day = article['ref_date'][2]
+              a_month = article.ref_dates[0].date[1]
+              a_day = article.ref_dates[0].date[2]
               article['reference_date'] = new Date a_year, a_month, a_day
               if a_month is monthDigit
                 if a_day is day
