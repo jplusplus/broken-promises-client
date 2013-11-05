@@ -1,31 +1,5 @@
 'use strict'
 
-# parse a date in mm/dd/yyyy format
-parseDate = (input)->
-  parts = input.split("/")  
-  # new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-  new Date(parts[2], parts[0] - 1, parts[1]) # months are 0-based
-
-# Yes if dates are the same day
-daysBetween = (first, second) ->
-  # Copy date parts of the timestamps, discarding the time parts.
-  one = new Date(first.getFullYear(), first.getMonth(), 1)
-  two = new Date(second.getFullYear(), second.getMonth(), 1)  
-  # Do the math.
-  millisecondsPerDay = 1000 * 60 * 60 * 24
-  millisBetween = two.getTime() - one.getTime()
-  days = millisBetween / millisecondsPerDay  
-  # Round down.
-  Math.floor days
-
-# Yes if dates are the same month
-monthsBetween = (first, second) ->
-    months
-    months = (second.getFullYear() - first.getFullYear()) * 12
-    months -= first.getMonth() + 1
-    months += second.getMonth()
-    if months <= 0 then 0 else months
-
 angular.module('brokenPromisesApp')
     .controller 'MainCtrl', ($scope, $http, $filter, Restangular) ->
         today = $scope.today = new Date()
