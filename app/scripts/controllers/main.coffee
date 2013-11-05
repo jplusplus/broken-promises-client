@@ -29,9 +29,14 @@ angular.module('brokenPromisesApp')
     .controller 'MainCtrl', ($scope, $http, $filter, Restangular) ->
         today = $scope.today = new Date()
         month = $filter('date')(today, "MMMM")
-        year  = $filter('date')(today, "yyyy")        
+        year  = $filter('date')(today, "yyyy")
         $scope.month = []
         $scope.year  = []
+        # Date information
+        $scope.date =
+          day : $filter('date')(today, "dd")
+          month : month
+          year : year
         # Loads data from API
         (do (Restangular.all 'articles').getList).then (data) =>
           $scope.days = []
