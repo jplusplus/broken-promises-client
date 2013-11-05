@@ -1,4 +1,5 @@
 'use strict'
+
 # parse a date in mm/dd/yyyy format
 parseDate = (input)->
   parts = input.split("/")  
