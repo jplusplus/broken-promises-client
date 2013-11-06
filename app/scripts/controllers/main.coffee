@@ -30,9 +30,9 @@ angular.module('brokenPromisesApp')
               if a_month is monthDigit
                 if a_day is day
                   $scope.days.push article
-                else
+                else if not a_day? or a_day > day
                   $scope.month.push article
-              else
+              else if not a_month? or a_month > monthDigit
                 $scope.year.push article
         $scope.active  = -1   
         $scope.article = null
