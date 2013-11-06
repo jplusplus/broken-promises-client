@@ -15,8 +15,7 @@ angular.module('brokenPromisesApp')
           month : month
           year : year
         # Loads data from API
-        #filter = '?where={"ref_date":"' + year + '"}'
-        filter = ''
+        filter = '?where={"ref_dates.date":"' + year + '"}'
         (do (Restangular.all "articles#{filter}").getList).then (data) =>
           $scope.days = []
           _.map data._items, (article) =>
