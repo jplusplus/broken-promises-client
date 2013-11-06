@@ -5,7 +5,7 @@ angular.module('brokenPromisesApp', ["ngRoute", "ui.bootstrap", 'restangular'])
     ($routeProvider, $sceProvider, RestangularProvider, $httpProvider) ->
       $sceProvider.enabled(false)
 
-      RestangularProvider.setBaseUrl "http://localhost\:5000"
+      RestangularProvider.setBaseUrl "http://broken-promises.herokuapp.com"
       RestangularProvider.setListTypeIsArray false
       RestangularProvider.setRestangularFields
         id: "_id"

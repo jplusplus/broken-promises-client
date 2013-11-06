@@ -15,7 +15,7 @@ angular.module('brokenPromisesApp')
           month : month
           year : year
         # Loads data from API
-        filter = '?where={"ref_dates.date":"' + year + '"}'
+        filter = '?where={"ref_dates.date":"' + year + '","note":2}'
         (do (Restangular.all "articles#{filter}").getList).then (data) =>
           $scope.days = []
           _.map data._items, (article) =>
@@ -29,9 +29,9 @@ angular.module('brokenPromisesApp')
               if a_month is monthDigit
                 if a_day is day
                   $scope.days.push article
-                else if not a_day? or a_day > day
+                else if not a_day?
                   $scope.month.push article
-              else if not a_month? or a_month > monthDigit
+              else if not a_month?
                 $scope.year.push article
         $scope.active  = -1   
         $scope.article = null
