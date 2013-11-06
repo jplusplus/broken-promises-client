@@ -2,7 +2,7 @@
 	<div class="col-xs-4 full-col">
 		<h3>
 			<b class="pull-right" 
-			popover="This column shows articles in the Guardian archive mentioning October 7 2013." 
+			popover="This column shows articles in the Guardian archive mentioning {{date.month}} {{date.day}} {{date.year}}."
 			popover-placement="left" 
 			popover-append-to-body="true" 
 			popover-trigger="mouseenter">?</b>
@@ -11,13 +11,13 @@
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
 				<li ng-repeat="item in days|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.web_url == item.web_url && active > -1}">
-					<p class="bold title">{{item.web_title || item.headline}}<p>
+					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
 						<span ng-bind-html="item.snippet" ng-if="item.snippet"></span>
 						<span ng-bind-html="item.body | snippet:'day'" ng-if="!item.snippet"></span>	
 					</p>
 					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.web_publication_date | date:'MM/dd/yyyy'}}</span>
+						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
 					</p>
 				</li>
 			</ul>
@@ -26,7 +26,7 @@
 	<div class="col-xs-4 full-col" ng-click="active = 1">
 		<h3>
 			<b class="pull-right" 
-			popover="This column shows articles mentioning October 2013." 
+			popover="This column shows articles mentioning {{date.month}} {{date.year}}."
 			popover-placement="left" 
 			popover-append-to-body="true" 
 			popover-trigger="mouseenter">?</b>
@@ -34,14 +34,14 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-repeat="item in month|orderBy:'web_publication_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.web_url == item.web_url && active > -1}">
-					<p class="bold title">{{item.web_title || item.headline}}<p>
+				<li ng-repeat="item in month|orderBy:'pub_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.web_url == item.web_url && active > -1}">
+					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet" ng-if="item.snippet != 'NULL'"></span>
-						<span ng-bind-html="item.body | snippet:'month'" ng-if="item.snippet == 'NULL'"></span>
+						<span ng-bind-html="item.snippet" ng-if="item.snippet"></span>
+						<span ng-bind-html="item.body | snippet:'month'" ng-if="!item.snippet"></span>
 					</p>
 					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.web_publication_date | date:'MM/dd/yyyy'}}</span>
+						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
 					</p>
 				</li>
 			</ul>
@@ -50,7 +50,7 @@
 	<div class="col-xs-4 full-col" ng-click="active = 2">
 		<h3>
 			<b class="pull-right" 
-			popover="This column show articles from 2012 or later mentioning 2013." 
+			popover="This column show articles from {{date.year - 1}} or later mentioning {{date.year}}."
 			popover-placement="left" 
 			popover-append-to-body="true" 
 			popover-trigger="mouseenter">?</b>
@@ -58,14 +58,14 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-repeat="item in year|orderBy:'web_publication_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.web_url == item.web_url && active > -1}">
-					<p class="bold title">{{item.web_title || item.headline}}<p>
+				<li ng-repeat="item in year|orderBy:'pub_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.web_url == item.web_url && active > -1}">
+					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet" ng-if="item.snippet != 'NULL'"></span>
-						<span ng-bind-html="item.body | snippet:'year'" ng-if="item.snippet == 'NULL'"></span>
+						<span ng-bind-html="item.snippet" ng-if="item.snippet"></span>
+						<span ng-bind-html="item.body | snippet:'year'" ng-if="!item.snippet"></span>
 					</p>
 					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.web_publication_date | date:'MM/dd/yyyy'}}</span>
+						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
 					</p>
 				</li>
 			</ul>
@@ -89,8 +89,8 @@
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			</div>
 			<p class="text-right">
-				<img src="images/the_guardian.png" alt="The Guardian" class="right10" /> 
-				<a class="btn btn-primary btn-lg" ng-href="{{article.web_url}}" target="_blank">See the article</a>
+				<img ng-src="images/{{article.source | slugify}}.png" alt="{{article.source}}" class="right10" />
+				<a class="btn btn-primary btn-lg" ng-href="{{article.url}}" target="_blank">See the article</a>
 			</p>
 		</div>
 	</article>
