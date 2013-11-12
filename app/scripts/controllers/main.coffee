@@ -28,13 +28,14 @@ angular.module('brokenPromisesApp')
                 a_day = ref_date.date[2]
                 article['reference_date'] = new Date a_year, a_month, a_day
                 article['snippet'] = ref_date.extract if ref_date.extract?
+                article.pub_date = new Date article.pub_date
                 if a_month is monthDigit
                   if a_day is day
-                    $scope.days.push article
+                    $scope.days.push angular.copy article
                   else if not a_day?
-                    $scope.month.push article
+                    $scope.month.push angular.copy article
                 else if not a_month?
-                  $scope.year.push article
+                  $scope.year.push angular.copy article
         $scope.active  = -1   
         $scope.article = null
         $scope.previewStyle = ->
