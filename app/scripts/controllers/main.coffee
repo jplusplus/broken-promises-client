@@ -36,12 +36,18 @@ angular.module('brokenPromisesApp')
                     $scope.month.push angular.copy article
                 else if not a_month?
                   $scope.year.push angular.copy article
-        $scope.active  = -1   
+        $scope.active  = -1
         $scope.article = null
         $scope.previewStyle = ->
-            left: if $scope.active is -1 then "100%" else ($scope.active+1)*33.33 + "%"        
+            left: if $scope.active is -1 then "100%" else ($scope.active+1)*33.33 + "%"
         $scope.setArticle = (article, active=-1)->
-            # Record the data to the scope
-            $scope.article = article
-            $scope.active  = active 
+            if (active >= 0)
+              if $scope.article? and $scope.article.url is article.url
+                $scope.article = undefined
+                active = -1
+              else
+                $scope.article = article
+            else
+              $scope.article = undefined
+            $scope.active  = active
         $scope.isToday = (item)-> true
