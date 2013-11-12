@@ -29,7 +29,7 @@ angular.module("brokenPromisesApp").filter "snippet", ->
       if targetIndex isnt -1
         ret = (theParts[i].substr 0, targetIndex) + "<span class=\"littlepart\">"
         ret += (theParts[i].substr targetIndex, theMatch.length) + "</span>"
-        ret += theParts[i].substr (targetIndex + theMatch.length), theParts[i].length + '.'
+        ret += (theParts[i].substr (targetIndex + theMatch.length), theParts[i].length) + '.'
         return ret
       i++
     trimmedString = string.substr(0, 100)
