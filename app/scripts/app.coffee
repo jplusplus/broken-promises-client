@@ -1,14 +1,16 @@
 'use strict'
 
 angular.module('brokenPromisesApp', ["ngRoute", "ui.bootstrap", 'restangular'])
-  .config ["$routeProvider", "$sceProvider", 'RestangularProvider', '$httpProvider',
-    ($routeProvider, $sceProvider, RestangularProvider, $httpProvider) ->
+  .config ["$routeProvider", "$sceProvider", 'RestangularProvider',
+    ($routeProvider, $sceProvider, RestangularProvider) ->
       $sceProvider.enabled(false)
 
       RestangularProvider.setBaseUrl "http://broken-promises.herokuapp.com"
       RestangularProvider.setListTypeIsArray false
       RestangularProvider.setRestangularFields
         id: "_id"
+      RestangularProvider.setDefaultHttpFields
+        cache : no
 
       $routeProvider
         .when '/',
