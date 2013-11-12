@@ -4,9 +4,9 @@ angular.module('brokenPromisesApp')
     .controller 'MainCtrl', ($scope, $http, $filter, Restangular) ->
         today = $scope.today = new Date()
         month = $filter('date')(today, "MMMM")
-        monthDigit = $filter('date')(today, "MM")
-        year  = $filter('date')(today, "yyyy")
-        day = $filter('date')(today, "dd")
+        monthDigit = parseInt $filter('date')(today, "MM")
+        year  = parseInt $filter('date')(today, "yyyy")
+        day = parseInt $filter('date')(today, "dd")
         $scope.month = []
         $scope.year  = []
         # Date information
@@ -21,18 +21,19 @@ angular.module('brokenPromisesApp')
           _.map data._items, (article) =>
             if not article.ref_dates[0]?
               return
-            a_year = article.ref_dates[0].date[0]
-            if a_year is year
-              a_month = article.ref_dates[0].date[1]
-              a_day = article.ref_dates[0].date[2]
-              article['reference_date'] = new Date a_year, a_month, a_day
-              if a_month is monthDigit
-                if a_day is day
-                  $scope.days.push article
-                else if not a_day?
-                  $scope.month.push article
-              else if not a_month?
-                $scope.year.push article
+            _.map article.ref_dates, (ref_date, index) =>
+              a_year = ref_date.date[0]
+              if a_year is year
+                a_month = ref_date.date[1]
+                a_day = ref_date.date[2]
+                article['reference_date'] = new Date a_year, a_month, a_day
+                if a_month is monthDigit
+                  if a_day is day
+                    $scope.days.push article
+                  else if not a_day?
+                    $scope.month.push article
+                else if not a_month?
+                  $scope.year.push article
         $scope.active  = -1   
         $scope.article = null
         $scope.previewStyle = ->
