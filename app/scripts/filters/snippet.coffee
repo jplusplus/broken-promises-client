@@ -10,7 +10,9 @@ angular.module("brokenPromisesApp").filter "snippet", ->
     parts = undefined
     theMatch = undefined
     trimmedString = undefined
-    string = string.replace(/(<([^>]+)>)/g, "").toLowerCase()
+    string = string.replace /(<([^>]+)>)/g, ""
+    theParts = (string.split ".").slice 0, 50
+    string = do string.toLowerCase
     parts = string.split(".").slice(0, 50)
     i = 0
     end = parts.length
@@ -24,7 +26,11 @@ angular.module("brokenPromisesApp").filter "snippet", ->
         when "year"
           theMatch = "#{do today.getFullYear}"
       targetIndex = parts[i].indexOf(theMatch)
-      return parts[i].replace(theMatch, "<span class=\"littlepart\">" + theMatch + "</span>")  if targetIndex isnt -1
+      if targetIndex isnt -1
+        ret = (theParts[i].substr 0, targetIndex) + "<span class=\"littlepart\">"
+        ret += (theParts[i].substr targetIndex, theMatch.length) + "</span>"
+        ret += theParts[i].substr (targetIndex + theMatch.length), theParts[i].length
+        return ret
       i++
     trimmedString = string.substr(0, 100)
     trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))) + " [...]"
