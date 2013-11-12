@@ -27,6 +27,7 @@ angular.module('brokenPromisesApp')
                 a_month = ref_date.date[1]
                 a_day = ref_date.date[2]
                 article['reference_date'] = new Date a_year, a_month, a_day
+                article['snippet'] = ref_date.extract if ref_date.extract?
                 if a_month is monthDigit
                   if a_day is day
                     $scope.days.push article
