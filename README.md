@@ -3,7 +3,7 @@
 
 ```
         _   .--------------------------------.
-      _|o|_ |    Application bring to you    |
+      _|o|_ |    Application brought to you  |
        (_)  |  	 with the amazing Yeoman!    |
      / \Y/ \;-,______________________________|
     ||  :  |\//
