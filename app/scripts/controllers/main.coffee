@@ -11,28 +11,35 @@ angular.module('brokenPromisesApp')
           month : do Date.today
           year : do Date.today
 
+
+
         load = (filter, cb) =>
           (do (Restangular.all "articles#{filter}").getList).then (data) =>
             cb data._items
 
-        loadDay = =>
+        @loadday = =>
           dateArr = [($filter 'date') $scope.dates.day, "yyyy"
                      ($filter 'date') $scope.dates.day, "MM"
                      ($filter 'date') $scope.dates.day, "dd"]
           date = _.reduce dateArr, (a, b) -> "#{a}, #{b}"
           filter = '?where={"ref_dates.date":{"$all":[' + date + ']},"note":2}&' + (do Date.now)
-          console.log filter
           load filter, (data) =>
             $scope.days = []
             _.map data, (article) =>
-              article['reference_date'] = new Date $scope.dates.day[0], $scope.dates.day[1], $scope.dates.day[2]
+              article['reference_date'] = $scope.dates.day
               _.map article.ref_dates, (ref_date) =>
                 if (_.difference dateArr, ref_date.date).length is 0
                   article['snippet'] = ref_date.extract if ref_date.extract?
               article.pub_date = new Date article.pub_date
               $scope.days.push angular.copy article
 
-        do loadDay
+        @loadmonth = =>
+          console.log "LOAD MONTH"
+
+        @loadyear = =>
+          console.log "LOAD YEAR"
+
+        do @loadday
 
         $scope.active  = -1
         $scope.article = null
@@ -51,10 +58,6 @@ angular.module('brokenPromisesApp')
         $scope.isToday = (item)-> true
 
         $scope.change = (scale, direction) =>
-          if scale is 'day'
-            $scope.dates.day.add days : direction
-            do loadDay
-          else if scale is 'month'
-            $scope.dates.month.add months : direction
-          else if scale is 'year'
-            $scope.dates.year.add years : direction
+          ops = {}; ops["#{scale}s"] = direction
+          $scope.dates[scale].add ops
+          do @["load#{scale}"]
