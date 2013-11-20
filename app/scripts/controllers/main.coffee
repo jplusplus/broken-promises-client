@@ -21,7 +21,7 @@ angular.module('brokenPromisesApp')
           dateArr = [($filter 'date') $scope.dates.day, "yyyy"
                      ($filter 'date') $scope.dates.day, "MM"
                      ($filter 'date') $scope.dates.day, "dd"]
-          date = _.reduce dateArr, (a, b) -> "#{a}, #{b}"
+          date = _.reduce dateArr, (a, b) -> "#{parseInt a}, #{parseInt b}"
           filter = '?where={"ref_dates.date":{"$all":[' + date + ']},"note":2}&' + (do Date.now)
           load filter, (data) =>
             $scope.days = []
