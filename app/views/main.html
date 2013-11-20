@@ -1,12 +1,14 @@
 <div class="row content">
 	<div class="col-xs-4 full-col">
 		<h3>
+			<i class="icon-chevron-left clickable" ng-click="change('day', -1)"></i>
 			<b class="pull-right" 
-			popover="This column shows articles in the selected archive mentioning {{date.month}} {{date.day}} {{date.year}}."
+			popover="This column shows articles in the selected archive mentioning {{dates.day[1]}} {{dates.day[2]}} {{dates.day[0]}}."
 			popover-placement="left" 
 			popover-append-to-body="true" 
 			popover-trigger="mouseenter">?</b>
-			{{today|date:'MMMM dd yyyy'}}
+			{{dates.day|date:'MMMM dd yyyy'}}
+			<i class="icon-chevron-right clickable" ng-click="change('day', 1)"></i>
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
@@ -25,12 +27,14 @@
 	</div>
 	<div class="col-xs-4 full-col">
 		<h3>
+			<i class="icon-chevron-left clickable" ng-click="change('month', -1)"></i>
 			<b class="pull-right" 
 			popover="This column shows articles mentioning {{date.month}} {{date.year}}."
 			popover-placement="left" 
 			popover-append-to-body="true" 
 			popover-trigger="mouseenter">?</b>
-			{{today|date:'MMMM yyyy'}}
+			{{dates.month|date:'MMMM yyyy'}}
+			<i class="icon-chevron-right clickable" ng-click="change('month', 1)"></i>
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
@@ -49,12 +53,14 @@
 	</div>
 	<div class="col-xs-4 full-col">
 		<h3>
+			<i class="icon-chevron-left clickable" ng-click="change('year', -1)"></i>
 			<b class="pull-right" 
 			popover="This column shows articles mentioning {{date.year}}."
 			popover-placement="left" 
 			popover-append-to-body="true" 
 			popover-trigger="mouseenter">?</b>
-			{{today|date:'yyyy'}}
+			{{dates.year|date:'yyyy'}}
+			<i class="icon-chevron-right clickable" ng-click="change('year', 1)"></i>
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">

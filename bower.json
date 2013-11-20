@@ -15,7 +15,8 @@
     "jquery.scrollTo": "*",
     "underscore": "*",
     "angular-ui-bootstrap-bower": "latest",
-    "restangular": "~1.1.6"
+    "restangular": "~1.1.6",
+    "datejs": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.*",
