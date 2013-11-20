@@ -40,6 +40,8 @@ angular.module('brokenPromisesApp')
           console.log "LOAD YEAR"
 
         do @loadday
+        do @loadmonth
+        do @loadyear
 
         $scope.active  = -1
         $scope.article = null
