@@ -68,7 +68,6 @@ angular.module('brokenPromisesApp')
               if Date.compare demanded, $scope.dates[field]
                 return
               if data.status isnt 'no_result'
-                console.log data.last_scrape_date
                 $scope.scrape_dates[field] = new Date data.last_scrape_date
 
         @loadday = =>
