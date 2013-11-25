@@ -63,12 +63,13 @@ angular.module('brokenPromisesApp')
                   article['snippet'] = ref_date.extract if ref_date.extract?
               article.pub_date = new Date article.pub_date
               $scope.articles[field].push angular.copy article
-          ### Retrieve the 'last_scrape' date ###
-          (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
-            if Date.compare demanded, $scope.dates[field]
-              return
-            if data.status isnt 'no_result'
-              $scope.scrape_dates[field] = new Date data.last_scrape_date
+            ### Retrieve the 'last_scrape' date ###
+            (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
+              if Date.compare demanded, $scope.dates[field]
+                return
+              if data.status isnt 'no_result'
+                console.log data.last_scrape_date
+                $scope.scrape_dates[field] = new Date data.last_scrape_date
 
         @loadday = =>
           dateArr = [($filter 'date') $scope.dates.day, "yyyy"

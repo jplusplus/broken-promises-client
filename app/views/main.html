@@ -8,7 +8,7 @@
 			popover-trigger="mouseenter">?</b>
 			<i class="icon-chevron-right clickable pull-right" ng-click="change(scale, 1)"></i>
 			<p class='last-scrape'>
-				<i ng-if="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}. </i>
+				<i ng-show="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}. </i>
 				<a class='clickable' ng-click='email[scale].showform=!email[scale].showform'>Want more results?</a>
 			</p>
 			<div class='subscribe' ng-show="email[scale].showform">
