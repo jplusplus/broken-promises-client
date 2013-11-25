@@ -17,9 +17,6 @@
 					<form ng-submit="subscribe(scale)">
 						<div class='input-group'>
 							<input type='email' class='form-control' placeholder='Your email' ng-model="email[scale].value" required />
-							<span class='input-group-addon'>
-								<i ng-class="{'icon-check':email[scale].value!=null,'icon-check-empty':email[scale].value==null}"></i>
-							</span>
 							<span class='input-group-btn'>
 								<button ng-disabled='email[scale].value==null' role='submit' class='btn btn-primary'>Ok</button>
 							</span>
