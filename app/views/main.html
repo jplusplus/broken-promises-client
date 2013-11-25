@@ -34,7 +34,7 @@
 					<i class="icon-spinner icon-spin icon-3x"></i>
 				</li>
 				<li ng-show="articles[scale].length <= 0" class='bold center'>No results for this date</li>
-				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
+				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" class='clickable' ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
 						<span ng-bind-html="item.snippet | snippet:scale:dates[scale]" ng-if="item.snippet"></span>

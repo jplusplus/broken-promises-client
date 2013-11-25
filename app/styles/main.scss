@@ -138,14 +138,17 @@ $plain-border:lighten($body-bg, 10);
                         text-align: center;
                     }
 
-                    cursor:pointer;             
                     padding:15px 20px;
                     border-bottom:solid 1px $plain-border;
-                    
-                    &:hover {
+
+                    &.clickable:hover {
                         background:darken($plain-bg, 5);
+
+                        &.active {
+                            background:$brand-primary;
+                        }
                     }
-                    
+
                     .publication-date {
                         font-size:80%;
                         margin-bottom:0;
@@ -159,7 +162,7 @@ $plain-border:lighten($body-bg, 10);
                     &.active {
                         color:white;
                         background:$brand-primary;
-                        
+
                         .text-muted {
                             color:rgba(white, 0.9);
                         }
