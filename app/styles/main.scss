@@ -78,10 +78,18 @@ $plain-border:lighten($body-bg, 10);
             top:0;
             left:20px;
             right:20px;
-            
+
+            span.date {
+                padding: 0 10px;
+            }
+
             i {
                 text-style:normal;
                 color:darken($text-color, 20);
+            }
+
+            i.pull-right {
+                padding-top: 10px;
             }
 
             b {

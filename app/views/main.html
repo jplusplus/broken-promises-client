@@ -2,13 +2,11 @@
 	<div class="col-xs-4 full-col" ng-repeat="scale in ['day','month','year']">
 		<h3>
 			<i class="icon-chevron-left clickable" ng-click="change(scale, -1)"></i>
-			<b class="pull-right" 
+			<span class='date'>{{dates[scale]|date:dates_format[scale]}}</span>
+			<b popover-placement="left" popover-append-to-body="true"
 			popover="This column shows articles in the selected archive mentioning {{dates[scale]|date:dates_format[scale]}}."
-			popover-placement="left" 
-			popover-append-to-body="true" 
 			popover-trigger="mouseenter">?</b>
-			{{dates[scale]|date:dates_format[scale]}}
-			<i class="icon-chevron-right clickable" ng-click="change(scale, 1)"></i>
+			<i class="icon-chevron-right clickable pull-right" ng-click="change(scale, 1)"></i>
 			<p class='last-scrape'>
 				<i ng-if="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}</i>
 				<a ng-if="scrape_dates[scale] != null" href="#" >Subscribe</a>
