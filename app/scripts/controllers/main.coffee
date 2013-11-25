@@ -22,8 +22,30 @@ angular.module('brokenPromisesApp')
           month : 'MMMM yyyy'
           year : 'yyyy'
 
+        $scope.email =
+          day :
+            showform : no
+            registered : no
+            value : undefined
+          month :
+            showform : no
+            registered : no
+            value : undefined
+          year :
+            showform : no
+            registered : no
+            value : undefined
+
+        $scope.subscribe = (scale) =>
+          if $scope.email[scale].value
+            $scope.email[scale].registered = yes
+
         load = (dateArr, field) =>
           $scope.articles[field] = []
+          $scope.email[field] =
+            showform : no
+            registered : no
+            value : undefined
           $scope.scrape_dates[field] = undefined
           (do (Restangular.all "articles/#{dateArr.join '/'}").getList).then (data) =>
             _.map data.articles, (article) =>

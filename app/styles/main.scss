@@ -64,20 +64,25 @@ $plain-border:lighten($body-bg, 10);
         position:relative;
 
         $column-top-height: 75px;
+        $extended-height: 75px;
 
         h3 {   
             z-index:110;
             position:absolute;
-            
+
             margin:0px;
-            padding:0 20px;
+            padding:10px 20px 0 20px;
             height:$column-top-height;
-            line-height:45px;
+            //line-height:45px;
             background:$plain-border;
             @include box-shadow(inherit);
             top:0;
             left:20px;
             right:20px;
+
+            &.extended {
+                height: $column-top-height + $extended-height;
+            }
 
             span.date {
                 padding: 0 10px;
@@ -92,20 +97,21 @@ $plain-border:lighten($body-bg, 10);
                 }
             }
 
-            i.pull-right {
-                padding-top: 10px;
-            }
-
             b {
                 color:mix($text-color, white);                
             }
 
             p.last-scrape {
                 font-weight: normal;
-                margin-top: 0;
-                margin-bottom: 0;
+                margin-top: 5px;
+                margin-bottom: 5px;
                 font-size: $font-size-base;
                 line-height: $font-size-base;
+            }
+
+            div.subscribe {
+                font-weight: normal;
+                font-size: $font-size-base;
             }
         }
                 
@@ -121,7 +127,10 @@ $plain-border:lighten($body-bg, 10);
             background:$plain-bg;
             border-right:solid 1px $plain-border;
             @include box-shadow(0 0 3px 2px darken($body-bg, 5));
-            
+
+            &.extended {
+                top: $column-top-height + $extended-height;
+            }
 
             .items {
 
