@@ -51,7 +51,10 @@ angular.module('brokenPromisesApp')
         load = (dateArr, field) =>
           reset field
           $scope.articles[field] = undefined
+          demanded = angular.copy $scope.dates[field]
           (do (Restangular.all "articles/#{dateArr.join '/'}").getList).then (data) =>
+            if Date.compare demanded, $scope.dates[field]
+              return
             reset field
             _.map data.articles, (article) =>
               article['reference_date'] = $scope.dates.day
@@ -62,6 +65,8 @@ angular.module('brokenPromisesApp')
               $scope.articles[field].push angular.copy article
           ### Retrieve the 'last_scrape' date ###
           (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
+            if Date.compare demanded, $scope.dates[field]
+              return
             if data.status isnt 'no_result'
               $scope.scrape_dates[field] = new Date data.last_scrape_date
 
