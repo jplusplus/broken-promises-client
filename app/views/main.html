@@ -12,6 +12,7 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
+				<li ng-show="days.length <= 0" class='bold'>No results for this date</li>
 				<li ng-repeat="item in days|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
@@ -38,6 +39,7 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
+				<li ng-show="month.length <= 0" class='bold'>No results for this date</li>
 				<li ng-repeat="item in month|orderBy:'pub_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
@@ -64,6 +66,7 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
+				<li ng-show="year.length <= 0" class='bold'>No results for this date</li>
 				<li ng-repeat="item in year|orderBy:'pub_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
