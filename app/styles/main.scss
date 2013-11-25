@@ -73,7 +73,6 @@ $plain-border:lighten($body-bg, 10);
             margin:0px;
             padding:10px 20px 0 20px;
             height:$column-top-height;
-            //line-height:45px;
             background:$plain-border;
             @include box-shadow(inherit);
             top:0;
@@ -103,15 +102,18 @@ $plain-border:lighten($body-bg, 10);
 
             p.last-scrape {
                 font-weight: normal;
-                margin-top: 5px;
-                margin-bottom: 5px;
+                padding: 10px 0;
                 font-size: $font-size-base;
-                line-height: $font-size-base;
             }
 
             div.subscribe {
                 font-weight: normal;
                 font-size: $font-size-base;
+
+                i.icon-check {
+                    color: $brand-success;
+                }
+                margin-bottom: 10px;
             }
         }
                 
@@ -129,13 +131,13 @@ $plain-border:lighten($body-bg, 10);
             @include box-shadow(0 0 3px 2px darken($body-bg, 5));
 
             &.extended {
-                //top: $column-top-height + $extended-height;
+                top: $column-top-height + $extended-height;
             }
 
             .items {
 
                 li {
-                    &.spinner {
+                    &.center {
                         text-align: center;
                     }
 

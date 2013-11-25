@@ -21,7 +21,7 @@
 								<i ng-class="{'icon-check':email[scale].value!=null,'icon-check-empty':email[scale].value==null}"></i>
 							</span>
 							<span class='input-group-btn'>
-								<button role='submit' class='btn btn-primary'>Ok</button>
+								<button ng-disabled='email[scale].value==null' role='submit' class='btn btn-primary'>Ok</button>
 							</span>
 						</div>
 					</form>
@@ -33,10 +33,10 @@
 		</h3>
 		<div class="plain" scrollbar ng-class="{extended:email[scale].showform}">
 			<ul class="list-unstyled items">
-				<li ng-show="articles[scale] == null" class="spinner">
+				<li ng-show="articles[scale] == null" class="center">
 					<i class="icon-spinner icon-spin icon-3x"></i>
 				</li>
-				<li ng-show="articles[scale].length <= 0" class='bold'>No results for this date</li>
+				<li ng-show="articles[scale].length <= 0" class='bold center'>No results for this date</li>
 				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
