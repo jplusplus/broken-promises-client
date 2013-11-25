@@ -40,14 +40,19 @@ angular.module('brokenPromisesApp')
           if $scope.email[scale].value
             $scope.email[scale].registered = yes
 
-        load = (dateArr, field) =>
+        reset = (field) =>
           $scope.articles[field] = []
           $scope.email[field] =
             showform : no
             registered : no
             value : undefined
           $scope.scrape_dates[field] = undefined
+
+        load = (dateArr, field) =>
+          reset field
+          $scope.articles[field] = undefined
           (do (Restangular.all "articles/#{dateArr.join '/'}").getList).then (data) =>
+            reset field
             _.map data.articles, (article) =>
               article['reference_date'] = $scope.dates.day
               _.map article.ref_dates, (ref_date) =>

@@ -4,7 +4,7 @@ _MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
   'august', 'september', 'october', 'november', 'december']
 
 angular.module("brokenPromisesApp").filter "snippet", ->
-  (string, type) ->
+  (string, type, date) ->
     end = undefined
     i = undefined
     parts = undefined
@@ -16,7 +16,7 @@ angular.module("brokenPromisesApp").filter "snippet", ->
     parts = string.split(".").slice(0, 50)
     i = 0
     end = parts.length
-    today = new Date
+    today = date
     while i < end
       switch type
         when "day"

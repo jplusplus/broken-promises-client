@@ -13,7 +13,7 @@
 			</p>
 			<div class='subscribe' ng-show="email[scale].showform">
 				<div ng-hide="email[scale].registered">
-					<span>Leave your email to be informed when new data are available.</span>
+					<p>Leave your email to be informed when new data are available.</p>
 					<form ng-submit="subscribe(scale)">
 						<div class='input-group'>
 							<input type='email' class='form-control' placeholder='Your email' ng-model="email[scale].value" required />
@@ -33,12 +33,15 @@
 		</h3>
 		<div class="plain" scrollbar ng-class="{extended:email[scale].showform}">
 			<ul class="list-unstyled items">
+				<li ng-show="articles[scale] == null" class="spinner">
+					<i class="icon-spinner icon-spin icon-3x"></i>
+				</li>
 				<li ng-show="articles[scale].length <= 0" class='bold'>No results for this date</li>
 				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet | snippet:scale" ng-if="item.snippet"></span>
-						<span ng-bind-html="item.body | snippet:scale" ng-if="!item.snippet"></span
+						<span ng-bind-html="item.snippet | snippet:scale:dates[scale]" ng-if="item.snippet"></span>
+						<span ng-bind-html="item.body | snippet:scale:dates[scale]" ng-if="!item.snippet"></span
 					</p>
 					<p class="text-right publication-date">
 						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>

@@ -129,12 +129,16 @@ $plain-border:lighten($body-bg, 10);
             @include box-shadow(0 0 3px 2px darken($body-bg, 5));
 
             &.extended {
-                top: $column-top-height + $extended-height;
+                //top: $column-top-height + $extended-height;
             }
 
             .items {
 
-                li {                           
+                li {
+                    &.spinner {
+                        text-align: center;
+                    }
+
                     cursor:pointer;             
                     padding:15px 20px;
                     border-bottom:solid 1px $plain-border;
