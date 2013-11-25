@@ -109,8 +109,23 @@ $plain-border:lighten($body-bg, 10);
             div.subscribe {
                 font-weight: normal;
                 font-size: $font-size-base;
-
                 margin-bottom: 10px;
+                position: relative;
+
+                a.close {
+                    position: absolute;
+                    color: mix($text-color, white);
+                    top: -20px;
+                    right: 0;
+
+                    i {
+                        font-size: $font-size-small;
+                    }
+
+                    &:hover {
+                        color: $text-color;
+                    }
+                }
             }
         }
                 

@@ -12,6 +12,7 @@
 				<a class='clickable' ng-click='email[scale].showform=!email[scale].showform'>Want more results?</a>
 			</p>
 			<div class='subscribe' ng-show="email[scale].showform">
+				<a class='close clickable' ng-click='email[scale].showform=0'><i class='icon-remove'></i></a>
 				<div ng-hide="email[scale].registered">
 					<p>Leave your email to be informed when new data are available.</p>
 					<form ng-submit="subscribe(scale)">
