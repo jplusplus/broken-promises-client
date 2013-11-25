@@ -17,7 +17,7 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-show="days.length <= 0 && scrape_date.day" class='bold'>No results for this date</li>
+				<li ng-show="day.length <= 0 && scrape_date.day" class='bold'>No results for this date</li>
 				<li ng-show="!scrape_date.day">
 					Want to be informed when the data are available?
 					<br /><br />
@@ -26,7 +26,7 @@
 						<button class='btn btn-primary'>Ok</button>
 					</form>
 				</li>
-				<li ng-repeat="item in days|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.url == item.url && active > -1}">
+				<li ng-repeat="item in day|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
 						<span ng-bind-html="item.snippet | snippet:'day'" ng-if="item.snippet"></span>
