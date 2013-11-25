@@ -1,24 +1,24 @@
 <div class="row content">
-	<div class="col-xs-4 full-col">
+	<div class="col-xs-4 full-col" ng-repeat="scale in ['day','month','year']">
 		<h3>
-			<i class="icon-chevron-left clickable" ng-click="change('day', -1)"></i>
+			<i class="icon-chevron-left clickable" ng-click="change(scale, -1)"></i>
 			<b class="pull-right" 
-			popover="This column shows articles in the selected archive mentioning {{dates.day[1]}} {{dates.day[2]}} {{dates.day[0]}}."
+			popover="This column shows articles in the selected archive mentioning {{dates[scale]|date:dates_format[scale]}}."
 			popover-placement="left" 
 			popover-append-to-body="true" 
 			popover-trigger="mouseenter">?</b>
-			{{dates.day|date:'MMMM dd yyyy'}}
-			<i class="icon-chevron-right clickable" ng-click="change('day', 1)"></i>
+			{{dates[scale]|date:dates_format[scale]}}
+			<i class="icon-chevron-right clickable" ng-click="change(scale, 1)"></i>
 			<p class='last-scrape'>
-				<i ng-if="scrape_date.day">Last scrap on </i>
-				<a ng-if="scrape_date.day" href="#" >Subscribe</a>
-				<i ng-if="!scrape_date.day">This date hasn't be scrapped yet.</i>
+				<i ng-if="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}</i>
+				<a ng-if="scrape_dates[scale] != null" href="#" >Subscribe</a>
+				<i ng-if="scrape_dates[scale] == null">This date hasn't be scrapped yet.</i>
 			</p>
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-show="day.length <= 0 && scrape_date.day" class='bold'>No results for this date</li>
-				<li ng-show="!scrape_date.day">
+				<li ng-show="articles[scale].length <= 0 && scrape_dates[scale]" class='bold'>No results for this date</li>
+				<li ng-show="!scrape_dates[scale]">
 					Want to be informed when the data are available?
 					<br /><br />
 					<form class='form-inline'>
@@ -26,91 +26,11 @@
 						<button class='btn btn-primary'>Ok</button>
 					</form>
 				</li>
-				<li ng-repeat="item in day|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.url == item.url && active > -1}">
+				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" ng-click="setArticle(item, 0)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet | snippet:'day'" ng-if="item.snippet"></span>
-						<span ng-bind-html="item.body | snippet:'day'" ng-if="!item.snippet"></span>	
-					</p>
-					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
-					</p>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="col-xs-4 full-col">
-		<h3>
-			<i class="icon-chevron-left clickable" ng-click="change('month', -1)"></i>
-			<b class="pull-right" 
-			popover="This column shows articles mentioning {{date.month}} {{date.year}}."
-			popover-placement="left" 
-			popover-append-to-body="true" 
-			popover-trigger="mouseenter">?</b>
-			{{dates.month|date:'MMMM yyyy'}}
-			<i class="icon-chevron-right clickable" ng-click="change('month', 1)"></i>
-			<p class='last-scrape'>
-				<i ng-if="scrape_date.month">Last scrap on </i>
-				<a ng-if="scrape_date.month" href="#" >Subscribe</a>
-				<i ng-if="!scrape_date.month">This date hasn't be scrapped yet.</i>
-			</p>
-		</h3>
-		<div class="plain" scrollbar>
-			<ul class="list-unstyled items">
-				<li ng-show="month.length <= 0 && scrape_dates.month" class='bold'>No results for this date</li>
-				<li ng-show="!scrape_date.month">
-					Want to be informed when the data are available?
-					<br /><br />
-					<form class='form-inline'>
-						<input type='text' class='form-control' placeholder='Please leave your email' />
-						<button class='btn btn-primary'>Ok</button>
-					</form>
-				</li>
-				<li ng-repeat="item in month|orderBy:'pub_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.url == item.url && active > -1}">
-					<p class="bold title">{{item.title || item.headline}}<p>
-					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet | snippet:'month'" ng-if="item.snippet"></span>
-						<span ng-bind-html="item.body | snippet:'month'" ng-if="!item.snippet"></span>
-					</p>
-					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
-					</p>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="col-xs-4 full-col">
-		<h3>
-			<i class="icon-chevron-left clickable" ng-click="change('year', -1)"></i>
-			<b class="pull-right" 
-			popover="This column shows articles mentioning {{date.year}}."
-			popover-placement="left" 
-			popover-append-to-body="true" 
-			popover-trigger="mouseenter">?</b>
-			{{dates.year|date:'yyyy'}}
-			<i class="icon-chevron-right clickable" ng-click="change('year', 1)"></i>
-			<p class='last-scrape'>
-				<i ng-if="scrape_date.month">Last scrap on </i>
-				<a ng-if="scrape_date.month" href="#" >Subscribe</a>
-				<i ng-if="!scrape_date.month">This date hasn't be scrapped yet.</i>
-			</p>
-		</h3>
-		<div class="plain" scrollbar>
-			<ul class="list-unstyled items">
-				<li ng-show="year.length <= 0 && scrape_dates.year" class='bold'>No results for this date</li>
-				<li ng-show="!scrape_date.year">
-					Want to be informed when the data are available?
-					<br /><br />
-					<form class='form-inline'>
-						<input type='text' class='form-control' placeholder='Please leave your email' />
-						<button class='btn btn-primary'>Ok</button>
-					</form>
-				</li>
-				<li ng-repeat="item in year|orderBy:'pub_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.url == item.url && active > -1}">
-					<p class="bold title">{{item.title || item.headline}}<p>
-					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet | snippet:'year'" ng-if="item.snippet"></span>
-						<span ng-bind-html="item.body | snippet:'year'" ng-if="!item.snippet"></span>
+						<span ng-bind-html="item.snippet | snippet:scale" ng-if="item.snippet"></span>
+						<span ng-bind-html="item.body | snippet:scale" ng-if="!item.snippet"></span
 					</p>
 					<p class="text-right publication-date">
 						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>

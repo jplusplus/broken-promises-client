@@ -2,22 +2,29 @@
 
 angular.module('brokenPromisesApp')
     .controller 'MainCtrl', ($scope, $http, $filter, Restangular) ->
-        $scope.day = []
-        $scope.month = []
-        $scope.year  = []
-        # Date information
+        $scope.articles =
+          day : []
+          month : []
+          year : []
+
         $scope.dates =
           day : do Date.today
           month : do Date.today
           year : do Date.today
 
-        $scope.scrap_dates =
+        $scope.scrape_dates =
           day : undefined
           month : undefined
           year : undefined
 
+        $scope.dates_format =
+          day : 'MMMM dd yyyy'
+          month : 'MMMM yyyy'
+          year : 'yyyy'
+
         load = (dateArr, field) =>
-          $scope[field] = []
+          $scope.articles[field] = []
+          $scope.scrape_dates[field] = undefined
           (do (Restangular.all "articles/#{dateArr.join '/'}").getList).then (data) =>
             _.map data.articles, (article) =>
               article['reference_date'] = $scope.dates.day
@@ -25,11 +32,11 @@ angular.module('brokenPromisesApp')
                 if (_.difference dateArr, ref_date.date).length is 0
                   article['snippet'] = ref_date.extract if ref_date.extract?
               article.pub_date = new Date article.pub_date
-              $scope[field].push angular.copy article
+              $scope.articles[field].push angular.copy article
           ### Retrieve the 'last_scrape' date ###
           (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
-            if data[0] isnt 'no_result'
-              console.log "HERER"
+            if data.status isnt 'no_result'
+              $scope.scrape_dates[field] = new Date data.last_scrape_date
 
         @loadday = =>
           dateArr = [($filter 'date') $scope.dates.day, "yyyy"
