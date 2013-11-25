@@ -8,8 +8,8 @@
 			popover-trigger="mouseenter">?</b>
 			<i class="icon-chevron-right clickable pull-right" ng-click="change(scale, 1)"></i>
 			<p class='last-scrape'>
-				<i ng-if="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}</i>
-				<a ng-if="scrape_dates[scale] != null" href="#" >Subscribe</a>
+				<i ng-if="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}. </i>
+				<a ng-if="scrape_dates[scale] != null" class='clickable' >Subscribe</a>
 				<i ng-if="scrape_dates[scale] == null">This date hasn't be scrapped yet.</i>
 			</p>
 		</h3>
@@ -19,10 +19,12 @@
 				<li ng-show="!scrape_dates[scale]">
 					Want to be informed when the data are available?
 					<br /><br />
-					<form class='form-inline'>
+					<div class='input-group'>
 						<input type='text' class='form-control' placeholder='Please leave your email' />
-						<button class='btn btn-primary'>Ok</button>
-					</form>
+						<span class='input-group-btn'>
+							<button class='btn btn-primary'>Ok</button>
+						</span>
+					</div>
 				</li>
 				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" ng-click="setArticle(item, 0)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
