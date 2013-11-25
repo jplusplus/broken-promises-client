@@ -61,7 +61,10 @@ angular.module('brokenPromisesApp')
         $scope.article = null
         $scope.previewStyle = ->
             left: if $scope.active is -1 then "100%" else ($scope.active+1)*33.33 + "%"
-        $scope.setArticle = (article, active=-1)->
+        $scope.setArticle = (article, active=-1) ->
+            if active is 'day' then active = 0
+            else if active is 'month' then active = 1
+            else if active is 'year' then active = 2
             if (active >= 0)
               if $scope.article? and $scope.article.url is article.url
                 $scope.article = undefined

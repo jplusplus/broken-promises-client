@@ -15,8 +15,8 @@
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-show="articles[scale].length <= 0 && scrape_dates[scale]" class='bold'>No results for this date</li>
-				<li ng-show="!scrape_dates[scale]">
+				<li ng-show="articles[scale].length <= 0 && scrape_dates[scale] != null" class='bold'>No results for this date</li>
+				<li ng-show="scrape_dates[scale] == null">
 					Want to be informed when the data are available?
 					<br /><br />
 					<div class='input-group'>
@@ -26,7 +26,7 @@
 						</span>
 					</div>
 				</li>
-				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" ng-click="setArticle(item, 0)" ng-class="{active: article.url == item.url && active > -1}">
+				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
 						<span ng-bind-html="item.snippet | snippet:scale" ng-if="item.snippet"></span>
