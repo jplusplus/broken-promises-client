@@ -86,6 +86,10 @@ $plain-border:lighten($body-bg, 10);
             i {
                 text-style:normal;
                 color:darken($text-color, 20);
+
+                &.clickable:hover {
+                    color:mix($text-color, white);
+                }
             }
 
             i.pull-right {
