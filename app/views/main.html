@@ -9,10 +9,23 @@
 			popover-trigger="mouseenter">?</b>
 			{{dates.day|date:'MMMM dd yyyy'}}
 			<i class="icon-chevron-right clickable" ng-click="change('day', 1)"></i>
+			<p class='last-scrape'>
+				<i ng-if="scrape_date.day">Last scrap on </i>
+				<a ng-if="scrape_date.day" href="#" >Subscribe</a>
+				<i ng-if="!scrape_date.day">This date hasn't be scrapped yet.</i>
+			</p>
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-show="days.length <= 0" class='bold'>No results for this date</li>
+				<li ng-show="days.length <= 0 && scrape_date.day" class='bold'>No results for this date</li>
+				<li ng-show="!scrape_date.day">
+					Want to be informed when the data are available?
+					<br /><br />
+					<form class='form-inline'>
+						<input type='text' class='form-control' placeholder='Please leave your email' />
+						<button class='btn btn-primary'>Ok</button>
+					</form>
+				</li>
 				<li ng-repeat="item in days|filter:isToday" ng-click="setArticle(item, 0)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
@@ -36,10 +49,23 @@
 			popover-trigger="mouseenter">?</b>
 			{{dates.month|date:'MMMM yyyy'}}
 			<i class="icon-chevron-right clickable" ng-click="change('month', 1)"></i>
+			<p class='last-scrape'>
+				<i ng-if="scrape_date.month">Last scrap on </i>
+				<a ng-if="scrape_date.month" href="#" >Subscribe</a>
+				<i ng-if="!scrape_date.month">This date hasn't be scrapped yet.</i>
+			</p>
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-show="month.length <= 0" class='bold'>No results for this date</li>
+				<li ng-show="month.length <= 0 && scrape_dates.month" class='bold'>No results for this date</li>
+				<li ng-show="!scrape_date.month">
+					Want to be informed when the data are available?
+					<br /><br />
+					<form class='form-inline'>
+						<input type='text' class='form-control' placeholder='Please leave your email' />
+						<button class='btn btn-primary'>Ok</button>
+					</form>
+				</li>
 				<li ng-repeat="item in month|orderBy:'pub_date'"  ng-click="setArticle(item, 1)"  ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">
@@ -63,10 +89,23 @@
 			popover-trigger="mouseenter">?</b>
 			{{dates.year|date:'yyyy'}}
 			<i class="icon-chevron-right clickable" ng-click="change('year', 1)"></i>
+			<p class='last-scrape'>
+				<i ng-if="scrape_date.month">Last scrap on </i>
+				<a ng-if="scrape_date.month" href="#" >Subscribe</a>
+				<i ng-if="!scrape_date.month">This date hasn't be scrapped yet.</i>
+			</p>
 		</h3>
 		<div class="plain" scrollbar>
 			<ul class="list-unstyled items">
-				<li ng-show="year.length <= 0" class='bold'>No results for this date</li>
+				<li ng-show="year.length <= 0 && scrape_dates.year" class='bold'>No results for this date</li>
+				<li ng-show="!scrape_date.year">
+					Want to be informed when the data are available?
+					<br /><br />
+					<form class='form-inline'>
+						<input type='text' class='form-control' placeholder='Please leave your email' />
+						<button class='btn btn-primary'>Ok</button>
+					</form>
+				</li>
 				<li ng-repeat="item in year|orderBy:'pub_date'" ng-click="setArticle(item, 2)" ng-class="{active: article.url == item.url && active > -1}">
 					<p class="bold title">{{item.title || item.headline}}<p>
 					<p class="text-muted snippet">

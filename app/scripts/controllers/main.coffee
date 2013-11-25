@@ -11,7 +11,10 @@ angular.module('brokenPromisesApp')
           month : do Date.today
           year : do Date.today
 
-
+        $scope.scrap_dates =
+          day : undefined
+          month : undefined
+          year : undefined
 
         load = (filter, cb) =>
           (do (Restangular.all "articles#{filter}").getList).then (data) =>
@@ -32,6 +35,9 @@ angular.module('brokenPromisesApp')
                   article['snippet'] = ref_date.extract if ref_date.extract?
               article.pub_date = new Date article.pub_date
               $scope.days.push angular.copy article
+          ### Retrieve the 'last_scrape' date ###
+          (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
+            console.log data
 
         @loadmonth = =>
           console.log "LOAD MONTH"
