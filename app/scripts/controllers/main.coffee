@@ -62,6 +62,7 @@ angular.module('brokenPromisesApp')
                 if (_.difference dateArr, ref_date.date).length is 0
                   article['snippet'] = ref_date.extract if ref_date.extract?
               article.pub_date = new Date article.pub_date
+              article.body = do article.body.trim
               $scope.articles[field].push angular.copy article
             ### Retrieve the 'last_scrape' date ###
             (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
