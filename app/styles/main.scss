@@ -103,6 +103,7 @@ div.top {
                 font-size: $font-size-base;
                 margin-bottom: 10px;
                 position: relative;
+                min-height: $extended-height - 10px;
 
                 a.close {
                     position: absolute;

@@ -36,9 +36,26 @@ angular.module('brokenPromisesApp')
             registered : no
             value : undefined
 
+        getDateArr = (scale) =>
+          if scale is 'day'
+            [($filter 'date') $scope.dates.day, "yyyy"
+             ($filter 'date') $scope.dates.day, "MM"
+             ($filter 'date') $scope.dates.day, "dd"]
+          else if scale is 'month'
+            [($filter 'date') $scope.dates.month, "yyyy"
+             ($filter 'date') $scope.dates.month, "MM"]
+          else if scale is 'year'
+            [($filter 'date') $scope.dates.year, "yyyy"]
+          else
+            null
+
         $scope.subscribe = (scale) =>
           if $scope.email[scale].value
-            $scope.email[scale].registered = yes
+            dateArr = getDateArr scale
+            url = "http://broken-promises.herokuapp.com/search_date/#{$scope.email[scale].value}/#{dateArr.join '/'}"
+            ($http.post url, '').success (data) =>
+              if data.status is 'ok'
+                $scope.email[scale].registered = yes
 
         reset = (field) =>
           $scope.articles[field] = []
@@ -48,7 +65,8 @@ angular.module('brokenPromisesApp')
             value : undefined
           $scope.scrape_dates[field] = undefined
 
-        load = (dateArr, field) =>
+        load = (field) =>
+          dateArr = getDateArr field
           reset field
           $scope.articles[field] = undefined
           demanded = angular.copy $scope.dates[field]
@@ -71,24 +89,9 @@ angular.module('brokenPromisesApp')
               if data.status isnt 'no_result'
                 $scope.scrape_dates[field] = new Date data.last_scrape_date
 
-        @loadday = =>
-          dateArr = [($filter 'date') $scope.dates.day, "yyyy"
-                     ($filter 'date') $scope.dates.day, "MM"
-                     ($filter 'date') $scope.dates.day, "dd"]
-          load dateArr, 'day'
-
-        @loadmonth = =>
-          dateArr = [($filter 'date') $scope.dates.month, "yyyy"
-                     ($filter 'date') $scope.dates.month, "MM"]
-          load dateArr, 'month'
-
-        @loadyear = =>
-          dateArr = [($filter 'date') $scope.dates.year, "yyyy"]
-          load dateArr, 'year'
-
-        do @loadday
-        do @loadmonth
-        do @loadyear
+        load 'day'
+        load 'month'
+        load 'year'
 
         $scope.active  = -1
         $scope.article = null
@@ -112,4 +115,4 @@ angular.module('brokenPromisesApp')
         $scope.change = (scale, direction) =>
           ops = {}; ops["#{scale}s"] = direction
           $scope.dates[scale].add ops
-          do @["load#{scale}"]
+          load scale
