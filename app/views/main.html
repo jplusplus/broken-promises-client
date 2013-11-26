@@ -11,7 +11,7 @@
 			<i class="icon-chevron-right clickable pull-right" ng-click="change(scale, 1)"></i>
 
 			<small><i class="icon-calendar clickable pull-right" ng-click="openCalendar(scale)"></i></small>
-			<input type='hidden' datepicker-popup="{{dates_format[scale]}}" ng-model="dates[scale]" is-open='calendars[scale]' />
+			<input type='hidden' datepicker-popup="{{dates_format[scale]}}" ng-model="dates[scale]" is-open='calendars[scale]' show-weeks='0' />
 			<p class='last-scrape'>
 				<i ng-show="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}. </i>
 				<a class='clickable' ng-click='email[scale].showform=!email[scale].showform'>Want more results?</a>
@@ -37,22 +37,25 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="plain" scrollbar ng-class="{extended:email[scale].showform}">
 				<ul class="list-unstyled items">
-				<li ng-show="articles[scale] == null" class="center">
-					<i class="icon-spinner icon-spin icon-3x"></i>
-				</li>
-				<li ng-show="articles[scale].length <= 0" class='bold center'>No results for this date</li>
-				<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" class='clickable' ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
-					<p class="bold title">{{item.title || item.headline}}<p>
-					<p class="text-muted snippet">
-						<span ng-bind-html="item.snippet | snippet:scale:dates[scale]" ng-if="item.snippet"></span>
-						<span ng-bind-html="item.body | snippet:scale:dates[scale]" ng-if="!item.snippet"></span
-					</p>
-					<p class="text-right publication-date">
-						Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
-					</p>
-				</li>
+					<li ng-show="articles[scale] == null" class="center">
+						<i class="icon-spinner icon-spin icon-3x"></i>
+					</li>
+
+					<li ng-show="articles[scale].length <= 0" class='bold center'>No results for this date</li>
+
+					<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" class='clickable' ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
+						<p class="bold title">{{item.title || item.headline}}<p>
+						<p class="text-muted snippet">
+							<span ng-bind-html="item.snippet | snippet:scale:dates[scale]" ng-if="item.snippet"></span>
+							<span ng-bind-html="item.body | snippet:scale:dates[scale]" ng-if="!item.snippet"></span
+						</p>
+						<p class="text-right publication-date">
+							Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
+						</p>
+					</li>
 			</ul>
 		</div>
 	</div>
@@ -64,6 +67,7 @@
 		<i class="icon-remove"></i>
 		<span class="sr-only">Close</span>
 	</a>
+
 	<article scrollbar>
 		<h2>{{article.web_title || article.headline}}</h2>
 		<div ng-bind-html="article.body | nl2br"></div>

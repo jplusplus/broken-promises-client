@@ -125,5 +125,3 @@ angular.module('brokenPromisesApp')
           if not $scope.calendars[scale]
             $timeout =>
               $scope.calendars[scale] = yes
-          else
-            $scope.calendars[scale] = no

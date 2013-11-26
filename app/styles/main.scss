@@ -156,6 +156,7 @@ div.top {
                 }
             }
 
+            // There's a lot of !important to override bootstrap's style
             ul.dropdown-menu {
                 top: 40px !important;
                 left: auto !important;
@@ -163,6 +164,19 @@ div.top {
                 font-size: $font-size-base;
                 font-weight: normal;
                 font-family: arial, sans-serif;
+                padding-left: 5px !important;
+                padding-right: 5px !important;
+
+                th { text-align: center; }
+
+                // Must hide some useless buttons through CSS as there's no option in the directive
+                // A cleaner way would be to override the entire template...
+                .btn-group {
+                    button:first-child {
+                        border-radius: $input-border-radius !important;
+                    }
+                    button:nth-child(2), button:last-child { display: none; }
+                }
             }
         }
 
