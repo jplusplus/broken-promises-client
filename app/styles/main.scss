@@ -23,31 +23,27 @@ $plain-border:lighten($body-bg, 10);
     }
 }
 
-.logo {
-    z-index:200;
-    position:fixed;
-    top:5px;
-    left:0px;
-    right:0;
-    background:url("../images/logo.png") 25px 0  no-repeat;    
-    height:65px;
-    display:block;
+div.top {
     border-bottom:1px solid darken($body-bg, 5);
+    margin-right: 0px;
     @include box-shadow(0 1px 0 0 rgba(white, .5));
 }
 
-.punch {    
-    z-index:220;
-    position:fixed;
-    top:15px;
-    left:510px;
-    right:10px;
+.logo {
+    background:url("../images/logo.png") 25px 0  no-repeat;
+    width:470px;
+    height: 65px;
+    display: block;
+}
+
+.punch {
     font-size:110%;
+    margin-top: 10px;
 }
 
 .view {
     position:absolute;
-    top:40px+53px;
+    top:93px;
     left:20px;
     margin-right:20px;
     bottom:20px;
@@ -261,5 +257,9 @@ $plain-border:lighten($body-bg, 10);
 @media (max-width: $screen-sm-min) {
     div.col {
         margin-bottom: 20px;
+    }
+
+    .view {
+        top: 93px+65px;
     }
 }
