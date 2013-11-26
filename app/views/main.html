@@ -14,7 +14,7 @@
 			<div class='subscribe' ng-show="email[scale].showform">
 				<a class='close clickable' ng-click='email[scale].showform=0'><i class='icon-remove'></i></a>
 				<div ng-hide="email[scale].registered">
-					<p>Leave your email to be informed when new data are available.</p>
+					<p class='arial'>Leave your email to be informed when new data are available.</p>
 					<form ng-submit="subscribe(scale)">
 						<div class='input-group'>
 							<input type='email' class='form-control' placeholder='Your email' ng-model="email[scale].value" required />
