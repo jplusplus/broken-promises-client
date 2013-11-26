@@ -69,16 +69,11 @@ div.top {
 
             margin:0px;
             padding:10px 20px 0 20px;
-            height:$column-top-height;
             background:$plain-border;
             @include box-shadow(inherit);
             top:0;
             left:20px;
             right:20px;
-
-            &.extended {
-                height: $column-top-height + $extended-height;
-            }
 
             span.date {
                 padding: 0 10px;
@@ -125,11 +120,10 @@ div.top {
                 }
             }
         }
-                
-        .plain {            
-            z-index:90;
+
+        .plain {
             position:absolute;
-            
+
             overflow:auto;
             top:$column-top-height;
             bottom:0;
