@@ -1,5 +1,5 @@
 <div class="row content">
-	<div class="col-xs-4 full-col" ng-repeat="scale in ['day','month','year']">
+	<div class="col-xs-12 col-md-4 full-col col" ng-repeat="scale in ['day','month','year']">
 		<h3 ng-class="{extended:email[scale].showform}">
 			<i class="icon-chevron-left clickable" ng-click="change(scale, -1)"></i>
 			<span class='date'>{{dates[scale]|date:dates_format[scale]}}</span>

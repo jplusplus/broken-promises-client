@@ -9,7 +9,6 @@ $plain-border:lighten($body-bg, 10);
 @import "animations";
 @import "tools";
 
-
 .jspVerticalBar {
     background:none;
     
@@ -62,6 +61,8 @@ $plain-border:lighten($body-bg, 10);
     .full-col {
         height:100%;
         position:relative;
+        top: 0;
+        left: 0;
 
         $column-top-height: 75px;
         $extended-height: 75px;
@@ -254,5 +255,11 @@ $plain-border:lighten($body-bg, 10);
         position:relative;
         top:5px;
         margin-left:5px;
+    }
+}
+
+@media (max-width: $screen-sm-min) {
+    div.col {
+        margin-bottom: 20px;
     }
 }
