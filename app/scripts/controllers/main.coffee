@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('brokenPromisesApp')
-    .controller 'MainCtrl', ($scope, $http, $filter, Restangular) ->
+    .controller 'MainCtrl', ($scope, $http, $filter, Restangular, $timeout) ->
         $scope.articles =
           day : []
           month : []
@@ -35,6 +35,11 @@ angular.module('brokenPromisesApp')
             showform : no
             registered : no
             value : undefined
+
+        $scope.calendars =
+          day : no
+          month : no
+          year : no
 
         getDateArr = (scale) =>
           if scale is 'day'
@@ -89,10 +94,6 @@ angular.module('brokenPromisesApp')
               if data.status isnt 'no_result'
                 $scope.scrape_dates[field] = new Date data.last_scrape_date
 
-        load 'day'
-        load 'month'
-        load 'year'
-
         $scope.active  = -1
         $scope.article = null
         $scope.previewStyle = ->
@@ -115,4 +116,14 @@ angular.module('brokenPromisesApp')
         $scope.change = (scale, direction) =>
           ops = {}; ops["#{scale}s"] = direction
           $scope.dates[scale].add ops
-          load scale
+
+        $scope.$watch 'dates.day', => load 'day'
+        $scope.$watch 'dates.month', => load 'month'
+        $scope.$watch 'dates.year', => load 'year'
+
+        $scope.openCalendar = (scale) =>
+          if not $scope.calendars[scale]
+            $timeout =>
+              $scope.calendars[scale] = yes
+          else
+            $scope.calendars[scale] = no

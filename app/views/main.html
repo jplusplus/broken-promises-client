@@ -1,18 +1,25 @@
 <div class="row content">
 	<div class="col-xs-12 col-md-4 full-col col" ng-repeat="scale in ['day','month','year']">
-		<h3>
+		<div class="h3">
 			<i class="icon-chevron-left clickable" ng-click="change(scale, -1)"></i>
+
 			<span class='date'>{{dates[scale]|date:dates_format[scale]}}</span>
 			<b popover-placement="left" popover-append-to-body="true"
 			popover="This column shows articles in the selected archive mentioning {{dates[scale]|date:dates_format[scale]}}."
 			popover-trigger="mouseenter">?</b>
+
 			<i class="icon-chevron-right clickable pull-right" ng-click="change(scale, 1)"></i>
+
+			<small><i class="icon-calendar clickable pull-right" ng-click="openCalendar(scale)"></i></small>
+			<input type='hidden' datepicker-popup="{{dates_format[scale]}}" ng-model="dates[scale]" is-open='calendars[scale]' />
 			<p class='last-scrape'>
 				<i ng-show="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}. </i>
 				<a class='clickable' ng-click='email[scale].showform=!email[scale].showform'>Want more results?</a>
 			</p>
+
 			<div class='subscribe' ng-show="email[scale].showform">
 				<a class='close clickable' ng-click='email[scale].showform=0'><i class='icon-remove'></i></a>
+
 				<div ng-hide="email[scale].registered">
 					<p class='arial'>Leave your email to be informed when new data are available.</p>
 					<form ng-submit="subscribe(scale)">
@@ -24,13 +31,14 @@
 						</div>
 					</form>
 				</div>
+
 				<div ng-show="email[scale].registered">
 					<p class='title bold arial'>You're now registered and will be informed when the data are available.</p>
 				</div>
 			</div>
-		</h3>
+		</div>
 		<div class="plain" scrollbar ng-class="{extended:email[scale].showform}">
-			<ul class="list-unstyled items">
+				<ul class="list-unstyled items">
 				<li ng-show="articles[scale] == null" class="center">
 					<i class="icon-spinner icon-spin icon-3x"></i>
 				</li>
