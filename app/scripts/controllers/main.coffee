@@ -80,7 +80,7 @@ angular.module('brokenPromisesApp')
               return
             reset field
             _.map data.articles, (article) =>
-              article['reference_date'] = $scope.dates.day
+              article['reference_date'] = $scope.dates[field]
               _.map article.ref_dates, (ref_date) =>
                 if (_.difference dateArr, ref_date.date).length is 0
                   article['snippet'] = ref_date.extract if ref_date.extract?
