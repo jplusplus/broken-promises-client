@@ -70,11 +70,11 @@
 
 	<article scrollbar>
 		<h2>{{article.web_title || article.headline}}</h2>
-		<div ng-bind-html="article.body | nl2br"></div>
+		<div ng-bind-html="article.body"></div>
 		<div class="top20">
 			<div class="well pull-left padding10">
 				Share on 
-				<a href="https://twitter.com/share" class="twitter-share-button top-10" data-url="{{article.web_url}}" data-via="Pirhoo">Tweet</a>
+				<a href="https://twitter.com/share" class="twitter-share-button top-10" data-url="{{article.url}}">Tweet</a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			</div>
 			<p class="text-right">
