@@ -49,8 +49,7 @@
 					<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" class='clickable' ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
 						<p class="bold title">{{item.title || item.headline}}<p>
 						<p class="text-muted snippet">
-							<span ng-bind-html="item.snippet | snippet:scale:dates[scale]" ng-if="item.snippet"></span>
-							<span ng-bind-html="item.body | snippet:scale:dates[scale]" ng-if="!item.snippet"></span
+							<span ng-bind-html="item.snippet | highlight:dates[scale]:scale"></span>
 						</p>
 						<p class="text-right publication-date">
 							Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>

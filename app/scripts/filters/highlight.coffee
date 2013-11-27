@@ -10,7 +10,9 @@ _SCALES = ['day', 'month', 'year']
         lCased = do str.toLowerCase
 
         match = undefined
-        switch _SCALES[scale]
+        if typeof scale isnt typeof ''
+            scale = _SCALES[scale]
+        switch scale
             when 'day'
                 match = "#{do date.getDate} #{_MONTHS[do date.getMonth]} #{do date.getFullYear}"
             when "month"

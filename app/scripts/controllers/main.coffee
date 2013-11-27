@@ -82,6 +82,7 @@ angular.module('brokenPromisesApp')
             _.map data.articles, (article) =>
               article['reference_date'] = $scope.dates[field]
               _.map article.ref_dates, (ref_date) =>
+                ref_date.date = _.map ref_date.date, (s) => String s
                 if (_.difference dateArr, ref_date.date).length is 0
                   article['snippet'] = ref_date.extract if ref_date.extract?
               article.pub_date = new Date article.pub_date
