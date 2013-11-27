@@ -10,7 +10,7 @@
 
 			<i class="icon-chevron-right clickable pull-right" ng-click="change(scale, 1)"></i>
 
-			<small><i class="icon-calendar clickable pull-right" ng-click="openCalendar(scale)"></i></small>
+			<small><i ng-if="scale!=='year'" class="icon-calendar clickable pull-right" ng-click="openCalendar(scale)"></i></small>
 			<input type='hidden' datepicker-popup="{{dates_format[scale]}}" ng-model="dates[scale]" is-open='calendars[scale]' show-weeks='0' />
 			<p class='last-scrape'>
 				<i ng-show="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date}}. </i>
