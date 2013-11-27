@@ -218,11 +218,6 @@ div.top {
                         font-size:80%;
                         margin-bottom:0;
                     }
-    
-                    .littlepart {
-                        padding:0 2px;
-                        background:rgba(yellow, 0.3);
-                    }                    
 
                     &.active {
                         color:white;
@@ -315,4 +310,9 @@ div.top {
     .view {
         top: 93px+65px;
     }
+}
+
+.littlepart {
+    padding:0 2px;
+    background:rgba(yellow, 0.3);
 }
