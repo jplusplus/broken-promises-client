@@ -6,7 +6,9 @@ _MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
 _SCALES = ['day', 'month', 'year']
 
 (angular.module 'brokenPromisesApp').filter 'highlight', ->
-    (str, date, scale) ->
+    (str, date, scale, strip = no) ->
+        if strip
+            str = str.replace /(<([^>]+)>)/g, ""
         lCased = do str.toLowerCase
 
         match = undefined
