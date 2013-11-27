@@ -118,6 +118,7 @@ angular.module('brokenPromisesApp')
           ops = {}; ops["#{scale}s"] = direction
           $scope.dates[scale].add ops
           load scale
+          $scope.active = -1
 
         $scope.$watch 'dates.day', => load 'day'
         $scope.$watch 'dates.month', => load 'month'
