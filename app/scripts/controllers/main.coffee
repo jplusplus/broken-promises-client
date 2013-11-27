@@ -97,8 +97,18 @@ angular.module('brokenPromisesApp')
 
         $scope.active  = -1
         $scope.article = null
+
         $scope.previewStyle = ->
-            left: if $scope.active is -1 then "100%" else ($scope.active+1)*33.33 + "%"
+          switch $scope.active
+            when -1
+              return ''
+            when 0
+              return 'day'
+            when 1
+              return 'month'
+            when 2
+              return 'year'
+
         $scope.setArticle = (article, active=-1) ->
             if active is 'day' then active = 0
             else if active is 'month' then active = 1
