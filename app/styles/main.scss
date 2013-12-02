@@ -335,3 +335,20 @@ div.top {
     padding:0 2px;
     background:rgba(yellow, 0.3);
 }
+
+div.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 40px;
+
+    a {
+        margin-right: 50px;
+    }
+
+    div {
+        background: white;
+        padding: 20px;
+    }
+}
