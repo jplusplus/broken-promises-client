@@ -39,18 +39,18 @@ _SCALES = ['day', 'month', 'year']
                 matches = [ date.toString 'yyyy' ]
 
         _.map matches, (match) =>
-            match = if match[0] is '0' then [(match.substr 1, match.length), match] else [match]
+            match = if match[0] is '0' then [match, match.substr 1, match.length] else [match]
             _.map match, (match) =>
                 match = do match.toLowerCase
                 i = 0
-                shift = 0
                 while i > -1
                     i = if i is 0 then lCased.indexOf match else lCased.indexOf match, i + 1
-                    if i > 0
+                    if i > 0 && str[i - 1] isnt '0'
                         tmp = str
-                        str = (tmp.substr 0, i + shift) + "<span class=\"littlepart\">"
-                        str += (tmp.substr i + shift, match.length) + "</span>"
-                        str += tmp.substr (i + match.length + shift), tmp.length
-                        shift += 32
+                        str = (tmp.substr 0, i) + "<span class=\"littlepart\">"
+                        str += (tmp.substr i, match.length) + "</span>"
+                        str += tmp.substr (i + match.length), tmp.length
+                        lCased = do str.toLowerCase
+                        i += 32
 
         str
