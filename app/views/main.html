@@ -47,7 +47,7 @@
 					<li ng-show="articles[scale].length <= 0" class='bold center'>No results for this date</li>
 
 					<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" class='clickable' ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
-						<p class="bold title">{{item.title || item.headline}}<p>
+						<p class="bold title" ng-bind-html="item.title || item.headline"><p>
 						<p class="text-muted snippet">
 							<span ng-bind-html="item.snippet | highlight:dates[scale]:scale:true"></span>
 						</p>
@@ -68,7 +68,7 @@
 	</a>
 
 	<article scrollbar>
-		<h2>{{article.title || article.headline}}</h2>
+		<h2 ng-bind-html="article.title || article.headline"></h2>
 		<div ng-bind-html="article.body | highlight:article.reference_date:active"></div>
 		<div class="top20">
 			<div class="well pull-left padding10">
