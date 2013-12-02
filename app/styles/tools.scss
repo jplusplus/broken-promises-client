@@ -2,6 +2,11 @@
 .relative { position:relative; }
 .hidden  { display:none; }
 
+div.clear { clear: both; }
+
+.left { float: left; }
+.right { float: right; }
+
 .clickable { cursor: pointer; }
 .arial { font-family: Arial, sans-serif; }
 
@@ -70,6 +75,8 @@
 .padding70 { padding:70px; }
 .padding80 { padding:80px; }
 .padding90 { padding:90px; }
+
+.hpadding30 { padding-left: 30px; padding-right: 30px; }
 
 html body .tl { text-align: left }
 html body .tr { text-align: right }
