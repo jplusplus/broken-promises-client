@@ -39,7 +39,7 @@ _SCALES = ['day', 'month', 'year']
                 matches = [ date.toString 'yyyy' ]
 
         _.map matches, (match) =>
-            match = if match.startsWith '0' then [(match.substr 1, match.length), match] else [match]
+            match = if match[0] is '0' then [(match.substr 1, match.length), match] else [match]
             _.map match, (match) =>
                 match = do match.toLowerCase
                 i = 0
