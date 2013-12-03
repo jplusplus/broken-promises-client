@@ -15,6 +15,7 @@
 			<div class='clear left scrapinfo'>
 				<p class='last-scrape left'>
 					<i ng-show="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date:"MMM dd, yyyy"}}. </i>
+					<i ng-show="scrape_dates[scale] == null">No recent scrap. </i>
 					<br />
 					<a class='clickable' ng-click='email[scale].showform=!email[scale].showform'>Want more results?</a>
 				</p>
