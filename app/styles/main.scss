@@ -11,19 +11,17 @@ $plain-border:lighten($body-bg, 10);
 
 .jspVerticalBar {
     background:none;
-    
-    .jspTrack { 
+
+    .jspTrack {
         background:none;
-        
+
         border-left:1px solid $plain-border;
-        
+
         .jspDrag {
             background:$brand-primary;
         }
     }
 }
-
-$text-color: #0F4C82;
 
 p a {
     text-decoration: underline;
@@ -81,6 +79,11 @@ div.top {
     margin-right:20px;
     bottom:20px;
     right:0px;
+
+    .scrapinfo {
+        padding:0 57px;
+        margin-top:-7px;
+    }
 
     .content {
         margin:0;
@@ -255,12 +258,12 @@ div.top {
                         .text-muted {
                             color:rgba(white, 0.9);
                         }
-        
+
                         .littlepart {
                             background:rgba(white, 0.1);
                             color:mix(yellow, white);
-                        }  
-                    
+                        }
+
                         .badge {
                             background-color:rgba(white, 0.2);
                             color:white;
@@ -286,6 +289,11 @@ div.top {
 
     @include box-shadow(0 0 3px 2px darken($body-bg, 5));
     @include animation(0.7s fadeIn);
+
+    h1 {
+        border-bottom:1px rgba($text-color, 0.1) solid;
+        padding-bottom:10px;
+    }
 
     article {
         position:absolute;
@@ -321,7 +329,7 @@ div.top {
         border:40px solid transparent;
         border-right-color:white;
         content:"";
-        z-index:100;   
+        z-index:100;
     }
 
     .twitter-share-button  {
@@ -402,7 +410,7 @@ div.about {
     right: 0;
     background: white;
     z-index: 150;
-    padding: 20px;
+    padding:20px 30px;
     bottom: -300px;
 
     -webkit-transition: bottom 0.3s linear;

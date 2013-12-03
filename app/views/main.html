@@ -4,7 +4,7 @@
 			<div class='arrow left clickable' ng-click="change(scale, -1)"></div>
 
 			<span class='date left'>{{dates[scale]|date:dates_format[scale]}}</span>
-			<b popover-placement="left" popover-append-to-body="true"
+			<b popover-placement="right" popover-append-to-body="true"
 			popover="This column shows articles in the selected archive mentioning {{dates[scale]|date:dates_format[scale]}}."
 			popover-trigger="mouseenter" class='left'>?</b>
 
@@ -12,7 +12,7 @@
 
 			<div ng-if="scale!=='year'" class="calendar clickable pull-right" ng-click="openCalendar(scale)"></div>
 			<input type='hidden' datepicker-popup="{{dates_format[scale]}}" ng-model="dates[scale]" is-open='calendars[scale]' show-weeks='0' />
-			<div class='clear left hpadding30'>
+			<div class='clear left scrapinfo'>
 				<p class='last-scrape left'>
 					<i ng-show="scrape_dates[scale] != null">Last scrap on {{scrape_dates[scale]|date:"MMM dd, yyyy"}}. </i>
 					<br />
@@ -20,7 +20,7 @@
 				</p>
 			</div>
 
-			<div class='subscribe clear left' ng-show="email[scale].showform">
+			<div class='subscribe clear left hpadding10' ng-show="email[scale].showform">
 				<a class='close clickable' ng-click='email[scale].showform=0'><i class='icon-remove'></i></a>
 
 				<div ng-hide="email[scale].registered">
@@ -71,11 +71,11 @@
 	</a>
 
 	<article scrollbar>
-		<h2 ng-bind-html="article.title || article.headline"></h2>
+		<h1 ng-bind-html="article.title || article.headline"></h1>
 		<div ng-bind-html="article.body | highlight:article.reference_date:active"></div>
 		<div class="top20">
 			<div class="well pull-left padding10">
-				Share on 
+				Share on
 				<a href="https://twitter.com/share" class="twitter-share-button top-10" data-url="{{article.url}}">Tweet</a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			</div>
