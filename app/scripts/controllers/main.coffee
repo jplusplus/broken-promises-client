@@ -86,7 +86,7 @@ angular.module('brokenPromisesApp')
                   if s < 10 then '0' + String s else String s
                 if (_.difference dateArr, ref_date.date).length is 0
                   article['snippet'] = ref_date.extract if ref_date.extract?
-              article.pub_date = new Date article.pub_date
+              article.pub_date = Date.parse article.pub_date
               article.body = do article.body.trim
               $scope.articles[field].push angular.copy article
             ### Retrieve the 'last_scrape' date ###
@@ -94,7 +94,7 @@ angular.module('brokenPromisesApp')
               if Date.compare demanded, $scope.dates[field]
                 return
               if data.status isnt 'no_result'
-                $scope.scrape_dates[field] = new Date data.last_scrape_date
+                $scope.scrape_dates[field] = Date.parse data.last_scrape_date
 
         $scope.active  = -1
         $scope.article = null
