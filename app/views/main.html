@@ -42,15 +42,11 @@
 			</div>
 		</div>
 
-		<div class="plain" scrollbar ng-class="{extended:email[scale].showform}">
+		<div class="plain" scrollbar="loadmore(scale)" ng-class="{extended:email[scale].showform}">
 				<ul class="list-unstyled items">
-					<li ng-show="articles[scale] == null" class="center">
-						<i class="icon-spinner icon-spin icon-3x"></i>
-					</li>
+					<li ng-show="articles[scale].length <= 0 && !loading[scale]" class='bold center'>No results for this date</li>
 
-					<li ng-show="articles[scale].length <= 0" class='bold center'>No results for this date</li>
-
-					<li ng-repeat="item in articles[scale]|orderBy:'pub_date'" class='clickable' ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
+					<li ng-repeat="item in articles[scale]" class='clickable' ng-click="setArticle(item, scale)" ng-class="{active: article.url == item.url && active > -1}">
 						<p class="bold title" ng-bind-html="item.title || item.headline"><p>
 						<p class="text-muted snippet">
 							<span ng-bind-html="item.snippet | highlight:dates[scale]:scale:true"></span>
@@ -58,6 +54,10 @@
 						<p class="text-right publication-date">
 							Published <span class="left05 badge">{{item.pub_date | date:'MM/dd/yyyy'}}</span>
 						</p>
+					</li>
+
+					<li ng-show="loading[scale]" class="center">
+						<i class="icon-spinner icon-spin icon-3x"></i>
 					</li>
 			</ul>
 		</div>

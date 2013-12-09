@@ -2,10 +2,17 @@
 
 angular.module('brokenPromisesApp')
     .controller 'MainCtrl', ($scope, $http, $filter, Restangular, $timeout) ->
+        Limit = 20
+
         $scope.articles =
           day : []
           month : []
           year : []
+
+        $scope.skipArticles =
+          day : 0
+          month : 0
+          year : 0
 
         $scope.dates =
           day : do Date.today
@@ -36,6 +43,11 @@ angular.module('brokenPromisesApp')
             registered : no
             value : undefined
 
+        $scope.loading =
+          day : yes
+          month : yes
+          year : yes
+
         $scope.calendars =
           day : no
           month : no
@@ -62,23 +74,33 @@ angular.module('brokenPromisesApp')
               if data.status is 'ok'
                 $scope.email[scale].registered = yes
 
-        reset = (field) =>
-          $scope.articles[field] = []
-          $scope.email[field] =
-            showform : no
-            registered : no
-            value : undefined
-          $scope.scrape_dates[field] = undefined
+        reset = (field, hard=no) =>
+          if hard
+            $scope.articles[field] = []
+            $scope.skipArticles[field] = 0
+            $scope.email[field] =
+              showform : no
+              registered : no
+              value : undefined
+            $scope.scrape_dates[field] = undefined
+          $scope.loading[field] = yes
 
-        load = (field) =>
+        load = (field, hard=no) =>
           dateArr = getDateArr field
-          reset field
-          $scope.articles[field] = undefined
+          reset field, hard
           demanded = angular.copy $scope.dates[field]
-          (do (Restangular.all "articles/#{dateArr.join '/'}").getList).then (data) =>
+          url = "articles/#{dateArr.join '/'}?limit=#{Limit}&skip=#{$scope.skipArticles[field]}"
+          (do (Restangular.all url).getList).then (data) =>
             if Date.compare demanded, $scope.dates[field]
               return
-            reset field
+
+            if data.articles.length < Limit
+              $scope.skipArticles[field] = -1
+            else
+              $scope.skipArticles[field] += data.articles.length
+
+            reset field, hard
+
             _.map data.articles, (article) =>
               article['reference_date'] = $scope.dates[field]
               _.map article.ref_dates, (ref_date) =>
@@ -89,6 +111,9 @@ angular.module('brokenPromisesApp')
               article.pub_date = Date.parse article.pub_date
               article.body = do article.body.trim
               $scope.articles[field].push angular.copy article
+
+            $scope.loading[field] = no
+
             ### Retrieve the 'last_scrape' date ###
             (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
               if Date.compare demanded, $scope.dates[field]
@@ -128,7 +153,7 @@ angular.module('brokenPromisesApp')
         $scope.change = (scale, direction) =>
           ops = {}; ops["#{scale}s"] = direction
           $scope.dates[scale].add ops
-          load scale
+          load scale, yes
           $scope.active = -1
 
         $scope.$watch 'dates.day', => load 'day'
@@ -139,3 +164,8 @@ angular.module('brokenPromisesApp')
           if not $scope.calendars[scale]
             $timeout =>
               $scope.calendars[scale] = yes
+
+        $scope.loadmore = (scale) =>
+          if $scope.skipArticles[scale] >= 0 and !$scope.loading[scale]
+            $scope.loading[scale] = yes
+            load scale
