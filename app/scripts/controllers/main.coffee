@@ -86,6 +86,8 @@ angular.module('brokenPromisesApp')
           $scope.loading[field] = yes
 
         load = (field, hard=no) =>
+          $scope.loading[field] = yes
+
           dateArr = getDateArr field
           reset field, hard
           demanded = angular.copy $scope.dates[field]
@@ -94,12 +96,12 @@ angular.module('brokenPromisesApp')
             if Date.compare demanded, $scope.dates[field]
               return
 
+            reset field, hard
+
             if data.articles.length < Limit
               $scope.skipArticles[field] = -1
             else
               $scope.skipArticles[field] += data.articles.length
-
-            reset field, hard
 
             _.map data.articles, (article) =>
               article['reference_date'] = $scope.dates[field]
@@ -114,12 +116,13 @@ angular.module('brokenPromisesApp')
 
             $scope.loading[field] = no
 
-            ### Retrieve the 'last_scrape' date ###
-            (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
-              if Date.compare demanded, $scope.dates[field]
-                return
-              if data.status isnt 'no_result'
-                $scope.scrape_dates[field] = Date.parse data.last_scrape_date
+            if hard
+              ### Retrieve the 'last_scrape' date ###
+              (do (Restangular.all "last_scrape/#{dateArr.join '/'}").getList).then (data) =>
+                if Date.compare demanded, $scope.dates[field]
+                  return
+                if data.status isnt 'no_result'
+                  $scope.scrape_dates[field] = Date.parse data.last_scrape_date
 
         $scope.active  = -1
         $scope.article = null
@@ -156,9 +159,9 @@ angular.module('brokenPromisesApp')
           load scale, yes
           $scope.active = -1
 
-        $scope.$watch 'dates.day', => load 'day'
-        $scope.$watch 'dates.month', => load 'month'
-        $scope.$watch 'dates.year', => load 'year'
+        $scope.$watch 'dates.day', => load 'day', yes
+        $scope.$watch 'dates.month', => load 'month', yes
+        $scope.$watch 'dates.year', => load 'year', yes
 
         $scope.openCalendar = (scale) =>
           if not $scope.calendars[scale]
@@ -167,5 +170,4 @@ angular.module('brokenPromisesApp')
 
         $scope.loadmore = (scale) =>
           if $scope.skipArticles[scale] >= 0 and !$scope.loading[scale]
-            $scope.loading[scale] = yes
             load scale

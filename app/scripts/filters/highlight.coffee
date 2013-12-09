@@ -45,7 +45,7 @@ _SCALES = ['day', 'month', 'year']
                 i = 0
                 while i > -1
                     i = if i is 0 then lCased.indexOf match else lCased.indexOf match, i + 1
-                    if i > 0 && str[i - 1] isnt '0'
+                    if i >= 0 && str[i - 1] isnt '0'
                         tmp = str
                         str = (tmp.substr 0, i) + "<span class=\"littlepart\">"
                         str += (tmp.substr i, match.length) + "</span>"
