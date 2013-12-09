@@ -8,7 +8,7 @@ It can be hard to keep track of all promises and predictions. This tool makes it
 
 ## Note
 
-This is only the frontend system wich will show you articles. To retrieve them, we have build [broken-promises](https://github.com/jplusplus/broken-promises).
+This is only the frontend system wich will show you articles. To retrieve them, we have built [broken-promises](https://github.com/jplusplus/broken-promises).
 
 ## Installation
 
