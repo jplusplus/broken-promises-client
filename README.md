@@ -10,7 +10,7 @@ It can be hard to keep track of all promises and predictions. This tool makes it
 
 This is only the frontend system wich will show you articles. To retrieve them, we have build [broken-promises](https://github.com/jplusplus/broken-promises).
 
-
+## Installation
 
 ```
         _   .--------------------------------.
@@ -22,8 +22,6 @@ This is only the frontend system wich will show you articles. To retrieve them, 
       |_|_|
        \ /
 ```
-
-## Installation
 
 Install command line tools:
 
